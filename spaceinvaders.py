@@ -50,6 +50,11 @@ class MyGame(arcade.Window):
         # Get Full Screen Width & Height
         self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
 
+        self.leftButtonDown = False
+        self.rightButtonDown = False
+        self.upButtonDown = False
+        self.downButtonDown = False
+
     def setup(self):
         # Create your sprites and sprite lists here
         self.defender_list = arcade.SpriteList()
@@ -89,24 +94,40 @@ class MyGame(arcade.Window):
         # MOVE DEFENDER WHEN UP KEY IS PRESSED
         elif key == arcade.key.UP:
             self.defender_sprite.change_y = MOVEMENT_SPEED
+            self.upButtonDown = True
         # MOVE DEFENDER WHEN DOWN KEY IS PRESSED
         elif key == arcade.key.DOWN:
             self.defender_sprite.change_y = -MOVEMENT_SPEED
+            self.downButtonDown = True
         # MOVE DEFENDER WHEN LEFT KEY IS PRESSED
         elif key == arcade.key.LEFT:
             self.defender_sprite.change_x = -MOVEMENT_SPEED
+            self.leftButtonDown = True
         # MOVE DEFENDER WHEN RIGHT KEY IS PRESSED
         elif key == arcade.key.RIGHT:
             self.defender_sprite.change_x = MOVEMENT_SPEED
+            self.rightButtonDown = True
 
     def on_key_release(self, key, key_modifiers):
         """
         Called whenever the user lets off a previously pressed key.
         """
-        if key == arcade.key.UP or key == arcade.key.DOWN:
-            self.defender_sprite.change_y = 0
-        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
-            self.defender_sprite.change_x = 0
+        if key == arcade.key.UP:
+            if self.downButtonDown == False:
+                self.defender_sprite.change_y = 0
+            self.upButtonDown = False
+        elif key == arcade.key.DOWN:
+            if self.upButtonDown == False:
+                self.defender_sprite.change_y = 0
+            self.downButtonDown = False
+        elif key == arcade.key.LEFT:
+            if self.rightButtonDown == False:
+                self.defender_sprite.change_x = 0
+            self.leftButtonDown = False
+        elif key == arcade.key.RIGHT:
+            if self.leftButtonDown == False:
+                self.defender_sprite.change_x = 0
+            self.rightButtonDown = False
 
     def on_mouse_motion(self, x, y, delta_x, delta_y):
         """
