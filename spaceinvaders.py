@@ -16,7 +16,6 @@ SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-
 class MyGame(arcade.Window):
     """
     Main application class.
@@ -29,7 +28,16 @@ class MyGame(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height, fullscreen=True, resizable=True)
 
+        # Center ViewPort in Full Screen Mode
+        # This will get the size of the window, and set the viewport to match.
+        # So if the window is 1000x1000, then so will our viewport. If
+        # you want something different, then use those coordinates instead.
+        '''
+        width, height = self.get_size()
+        self.set_viewport(0, width, 0, height)
+
         arcade.set_background_color(arcade.color.BLACK)
+        '''
 
         # If you have sprite lists, you should create them here,
         # and set them to None
@@ -41,14 +49,17 @@ class MyGame(arcade.Window):
         # Don't show the mouse cursor
         self.set_mouse_visible(False)
 
+        # Get Full Screen Width & Height
+        self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
+
     def setup(self):
         # Create your sprites and sprite lists here
         self.defender_list = arcade.SpriteList()
 
         # Set up the defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER)
-        self.defender_sprite.center_x = 400
-        self.defender_sprite.center_y = 300
+        self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH / 2
+        self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT / 2
         self.defender_list.append(self.defender_sprite)
 
     def on_draw(self):
