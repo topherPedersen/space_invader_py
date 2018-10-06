@@ -13,9 +13,6 @@ import arcade
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-
 class MyGame(arcade.Window):
     """
     Main application class.
@@ -25,8 +22,8 @@ class MyGame(arcade.Window):
     with your own code. Don't leave 'pass' in this program.
     """
 
-    def __init__(self, width, height):
-        super().__init__(width, height, fullscreen=True, resizable=True)
+    def __init__(self):
+        super().__init__(fullscreen=True, resizable=True)
 
         # Center ViewPort in Full Screen Mode
         # This will get the size of the window, and set the viewport to match.
@@ -119,7 +116,7 @@ class MyGame(arcade.Window):
 
 def main():
     """ Main method """
-    game = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
+    game = MyGame()
     game.setup()
     arcade.run()
 
