@@ -11,7 +11,7 @@ import random
 import arcade
 
 # --- Constants ---
-SPRITE_SCALING_PLAYER = 0.5
+SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -47,8 +47,8 @@ class MyGame(arcade.Window):
 
         # Set up the defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER)
-        self.defender_sprite.center_x = 50
-        self.defender_sprite.center_y = 50
+        self.defender_sprite.center_x = 400
+        self.defender_sprite.center_y = 300
         self.defender_list.append(self.defender_sprite)
 
     def on_draw(self):
