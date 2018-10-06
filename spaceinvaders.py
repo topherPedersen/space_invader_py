@@ -12,6 +12,7 @@ import arcade
 
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
+MOVEMENT_SPEED = 5
 
 class MyGame(arcade.Window):
     """
@@ -72,12 +73,9 @@ class MyGame(arcade.Window):
         self.defender_list.draw()
 
     def update(self, delta_time):
-        """
-        All the logic to move, and the game logic goes here.
-        Normally, you'll call update() on the sprite lists that
-        need it.
-        """
-        pass
+        # Call update on all sprites (The sprites don't do much in this
+        # example though.)
+        self.defender_list.update()
 
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
@@ -88,12 +86,27 @@ class MyGame(arcade.Window):
             # so there is a one-to-one mapping.
             width, height = self.get_size()
             self.set_viewport(0, width, 0, height)
+        # MOVE DEFENDER WHEN UP KEY IS PRESSED
+        elif key == arcade.key.UP:
+            self.defender_sprite.change_y = MOVEMENT_SPEED
+        # MOVE DEFENDER WHEN DOWN KEY IS PRESSED
+        elif key == arcade.key.DOWN:
+            self.defender_sprite.change_y = -MOVEMENT_SPEED
+        # MOVE DEFENDER WHEN LEFT KEY IS PRESSED
+        elif key == arcade.key.LEFT:
+            self.defender_sprite.change_x = -MOVEMENT_SPEED
+        # MOVE DEFENDER WHEN RIGHT KEY IS PRESSED
+        elif key == arcade.key.RIGHT:
+            self.defender_sprite.change_x = MOVEMENT_SPEED
 
     def on_key_release(self, key, key_modifiers):
         """
         Called whenever the user lets off a previously pressed key.
         """
-        pass
+        if key == arcade.key.UP or key == arcade.key.DOWN:
+            self.defender_sprite.change_y = 0
+        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.defender_sprite.change_x = 0
 
     def on_mouse_motion(self, x, y, delta_x, delta_y):
         """
