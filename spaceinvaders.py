@@ -12,6 +12,7 @@ import arcade
 
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
+SPRITE_SCALING_INVADER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
 MOVEMENT_SPEED = 5
 
 class MyGame(arcade.Window):
@@ -25,21 +26,14 @@ class MyGame(arcade.Window):
 
     def __init__(self):
         super().__init__(fullscreen=True, resizable=True)
-
-        # Center ViewPort in Full Screen Mode
-        # This will get the size of the window, and set the viewport to match.
-        # So if the window is 1000x1000, then so will our viewport. If
-        # you want something different, then use those coordinates instead.
-        '''
-        width, height = self.get_size()
-        self.set_viewport(0, width, 0, height)
-
+        
+        # Set Background Color
         arcade.set_background_color(arcade.color.BLACK)
-        '''
 
         # If you have sprite lists, you should create them here,
         # and set them to None
         self.defender_list = None
+        self.invader_list = None
 
         # Set up the player info
         self.defender_sprite = None
@@ -58,6 +52,21 @@ class MyGame(arcade.Window):
     def setup(self):
         # Create your sprites and sprite lists here
         self.defender_list = arcade.SpriteList()
+        self.invader_list = arcade.SpriteList()
+
+        # Create the coins
+        for i in range(13):
+
+            # Create the coin instance
+            # Coin image from kenney.nl
+            invader = arcade.Sprite("Invader.png", SPRITE_SCALING_INVADER)
+
+            # Position the coin
+            invader.center_x = random.randrange(self.FULL_SCREEN_WIDTH)
+            invader.center_y = random.randrange(self.FULL_SCREEN_HEIGHT)
+
+            # Add the coin to the lists
+            self.invader_list.append(invader)
 
         # Set up the defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER)
@@ -76,11 +85,13 @@ class MyGame(arcade.Window):
 
         # Call draw() on all your sprite lists below
         self.defender_list.draw()
+        self.invader_list.draw()
 
     def update(self, delta_time):
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
         self.defender_list.update()
+        self.invader_list.update()
 
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
