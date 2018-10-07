@@ -90,8 +90,7 @@ class MyGame(arcade.Window):
         defenderPosition = self.defender_sprite.get_position()
         if self.leftButtonDown == True and defenderPosition[0] < self.LEFT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
-
-        if self.rightButtonDown == True and defenderPosition[1] > self.RIGHT_BOUNDARY_X:
+        elif self.rightButtonDown == True and defenderPosition[0] > self.RIGHT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
 
     def on_key_press(self, key, key_modifiers):
