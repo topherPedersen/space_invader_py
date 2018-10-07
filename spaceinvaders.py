@@ -1,4 +1,3 @@
-# first commit using git from the command line :)
 import random
 import arcade
 
@@ -35,11 +34,13 @@ class MyGame(arcade.Window):
 
         # Get Full Screen Width & Height
         self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
+        self.CENTER_X =  self.FULL_SCREEN_WIDTH / 2
+        self.CENTER_Y =  self.FULL_SCREEN_HEIGHT / 2
+        self.LEFT_BOUNDARY_X = self.CENTER_X - (self.CENTER_X * 0.5)
+        self.RIGHT_BOUNDARY_X = self.CENTER_X + (self.CENTER_X * 0.5)
 
         self.leftButtonDown = False
         self.rightButtonDown = False
-        self.upButtonDown = False
-        self.downButtonDown = False
 
     def setup(self):
         # Create your sprites and sprite lists here
@@ -85,6 +86,14 @@ class MyGame(arcade.Window):
         self.defender_list.update()
         self.invader_list.update()
 
+        # Prevent Defender From Moving Off Screen or "Out of Bounds"
+        defenderPosition = self.defender_sprite.get_position()
+        if self.leftButtonDown == True and defenderPosition[0] < self.LEFT_BOUNDARY_X:
+            self.defender_sprite.change_x = 0
+
+        if self.rightButtonDown == True and defenderPosition[1] > self.RIGHT_BOUNDARY_X:
+            self.defender_sprite.change_x = 0
+
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
         if key == arcade.key.ESCAPE:
@@ -94,36 +103,22 @@ class MyGame(arcade.Window):
             # so there is a one-to-one mapping.
             width, height = self.get_size()
             self.set_viewport(0, width, 0, height)
-        # MOVE DEFENDER WHEN UP KEY IS PRESSED
-        elif key == arcade.key.UP:
-            self.defender_sprite.change_y = MOVEMENT_SPEED
-            self.upButtonDown = True
-        # MOVE DEFENDER WHEN DOWN KEY IS PRESSED
-        elif key == arcade.key.DOWN:
-            self.defender_sprite.change_y = -MOVEMENT_SPEED
-            self.downButtonDown = True
         # MOVE DEFENDER WHEN LEFT KEY IS PRESSED
         elif key == arcade.key.LEFT:
             self.defender_sprite.change_x = -MOVEMENT_SPEED
             self.leftButtonDown = True
+            print("LEFT KEY PRESSED!")
         # MOVE DEFENDER WHEN RIGHT KEY IS PRESSED
         elif key == arcade.key.RIGHT:
             self.defender_sprite.change_x = MOVEMENT_SPEED
             self.rightButtonDown = True
+            print("RIGHT KEY PRESSED!")
 
     def on_key_release(self, key, key_modifiers):
         """
         Called whenever the user lets off a previously pressed key.
         """
-        if key == arcade.key.UP:
-            if self.downButtonDown == False:
-                self.defender_sprite.change_y = 0
-            self.upButtonDown = False
-        elif key == arcade.key.DOWN:
-            if self.upButtonDown == False:
-                self.defender_sprite.change_y = 0
-            self.downButtonDown = False
-        elif key == arcade.key.LEFT:
+        if key == arcade.key.LEFT:
             if self.rightButtonDown == False:
                 self.defender_sprite.change_x = 0
             self.leftButtonDown = False
