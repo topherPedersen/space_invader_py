@@ -106,12 +106,10 @@ class MyGame(arcade.Window):
         elif key == arcade.key.LEFT:
             self.defender_sprite.change_x = -MOVEMENT_SPEED
             self.leftButtonDown = True
-            print("LEFT KEY PRESSED!")
         # MOVE DEFENDER WHEN RIGHT KEY IS PRESSED
         elif key == arcade.key.RIGHT:
             self.defender_sprite.change_x = MOVEMENT_SPEED
             self.rightButtonDown = True
-            print("RIGHT KEY PRESSED!")
 
     def on_key_release(self, key, key_modifiers):
         """
