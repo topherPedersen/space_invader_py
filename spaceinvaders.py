@@ -43,29 +43,41 @@ class MyGame(arcade.Window):
         self.rightButtonDown = False
 
     def setup(self):
-        # Create your sprites and sprite lists here
+        # Create Sprite Lists
         self.defender_list = arcade.SpriteList()
         self.invader_list = arcade.SpriteList()
 
-        # Create the coins
-        for i in range(13):
+        # Create Defender
+        self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
+        self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH / 2 # Position
+        self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.15 # Position
+        self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
 
-            # Create the coin instance
-            # Coin image from kenney.nl
+
+        # Create Top Row Invaders
+        top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
+        for i in range(6):
+            # Set X Position
+            if i == 0:
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+            elif i == 1:
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+            elif i == 2:
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+            elif i == 3:
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+            elif i == 4:
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+            elif i == 5:
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+
+            # Instantiate Invader
             invader = arcade.Sprite("Invader.png", SPRITE_SCALING_INVADER)
-
-            # Position the coin
-            invader.center_x = random.randrange(self.FULL_SCREEN_WIDTH)
-            invader.center_y = random.randrange(self.FULL_SCREEN_HEIGHT)
-
-            # Add the coin to the lists
+            # Position Invader
+            invader.center_x = top_row_invader_x_position
+            invader.center_y = top_row_invader_y_position
+            # Add Invader to Invader List
             self.invader_list.append(invader)
-
-        # Set up the defender
-        self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER)
-        self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH / 2
-        self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.15
-        self.defender_list.append(self.defender_sprite)
 
     def on_draw(self):
         """
