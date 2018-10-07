@@ -64,7 +64,7 @@ class MyGame(arcade.Window):
         # Set up the defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER)
         self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH / 2
-        self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT / 2
+        self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.15
         self.defender_list.append(self.defender_sprite)
 
     def on_draw(self):
