@@ -4,7 +4,9 @@ import arcade
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
 SPRITE_SCALING_INVADER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
-MOVEMENT_SPEED = 5
+MOVEMENT_SPEED = 5 # Used With Keyboard
+MOVEMENT_MULTIPLIER = 5 # Used With Joystick
+DEAD_ZONE = 0.05 # Joystick Related Constant (See Arcade Documentation Regarding Joysticks)
 
 class MyGame(arcade.Window):
     """
@@ -17,6 +19,18 @@ class MyGame(arcade.Window):
 
     def __init__(self):
         super().__init__(fullscreen=True, resizable=True)
+
+        # Add Joystick
+        joysticks = arcade.get_joysticks()
+        if joysticks:
+            self.joystick = joysticks[0]
+            self.joystick.open()
+            self.joystick.on_joybutton_press = self.on_joybutton_press
+            self.joystick.on_joybutton_release = self.on_joybutton_release
+            self.joystick.on_joyhat_motion = self.on_joyhat_motion
+        else:
+            print("There are no Joysticks")
+            self.joystick = None
         
         # Set Background Color
         arcade.set_background_color(arcade.color.BLACK)
@@ -205,6 +219,20 @@ class MyGame(arcade.Window):
         elif self.rightButtonDown == True and defenderPosition[0] > self.RIGHT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
 
+        # If Joystick is Available, Move Player When Joystick Moved
+        # NOTICE: The code to move the player when a keyboard button
+        # is pressed is contained in the on_key_press and on_key_release
+        # methods, but the code to move the player when the joystick is
+        # moved is contained here, in the update method.
+        if self.joystick:
+            joystick_input = self.joystick.x * MOVEMENT_MULTIPLIER
+            # Set a "dead zone" to prevent drive from a centered joystick
+            if abs(joystick_input) < DEAD_ZONE:
+                self.defender_sprite.change_x = 0
+            else:
+                self.defender_sprite.change_x = joystick_input
+        
+
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
         if key == arcade.key.ESCAPE:
@@ -236,23 +264,14 @@ class MyGame(arcade.Window):
                 self.defender_sprite.change_x = 0
             self.rightButtonDown = False
 
-    def on_mouse_motion(self, x, y, delta_x, delta_y):
-        """
-        Called whenever the mouse moves.
-        """
-        pass
+    def on_joybutton_press(self, joystick, button):
+        print("Button {} down".format(button))
 
-    def on_mouse_press(self, x, y, button, key_modifiers):
-        """
-        Called when the user presses a mouse button.
-        """
-        pass
+    def on_joybutton_release(self, joystick, button):
+        print("Button {} up".format(button))
 
-    def on_mouse_release(self, x, y, button, key_modifiers):
-        """
-        Called when a user releases a mouse button.
-        """
-        pass
+    def on_joyhat_motion(self, joystick, hat_x, hat_y):
+        print("Hat ({}, {})".format(hat_x, hat_y))
 
 
 def main():
