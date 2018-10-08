@@ -226,12 +226,25 @@ class MyGame(arcade.Window):
         # moved is contained here, in the update method.
         if self.joystick:
             joystick_input = self.joystick.x * MOVEMENT_MULTIPLIER
-            # Set a "dead zone" to prevent drive from a centered joystick
-            if abs(joystick_input) < DEAD_ZONE:
-                self.defender_sprite.change_x = 0
+            # When the joystick is in the "left" position, and the player has not
+            # gone out of bounds on the left side of the screen, move defender left.
+            if joystick_input < 0 and defenderPosition[0] > self.LEFT_BOUNDARY_X:
+                # Set a "dead zone" to prevent drive from a centered joystick
+                if abs(joystick_input) < DEAD_ZONE:
+                    self.defender_sprite.change_x = 0
+                else:
+                    self.defender_sprite.change_x = joystick_input
+            # When the joystick is in the "right" position, and the player has not
+            # gone out of bounds on the right side of the screen, move defender right.
+            elif joystick_input > 0 and defenderPosition[0] < self.RIGHT_BOUNDARY_X:
+                # Set a "dead zone" to prevent drive from a centered joystick
+                if abs(joystick_input) < DEAD_ZONE:
+                    self.defender_sprite.change_x = 0
+                else:
+                    self.defender_sprite.change_x = joystick_input
+            # Else, stop the defender so that he does not go off the screen
             else:
-                self.defender_sprite.change_x = joystick_input
-        
+                self.defender_sprite.change_x = 0
 
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
