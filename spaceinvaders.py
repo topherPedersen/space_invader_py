@@ -54,21 +54,121 @@ class MyGame(arcade.Window):
         self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
 
 
-        # Create Top Row Invaders
-        top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
-        for i in range(6):
-            # Set X Position
+        # Create Invaders
+        for i in range(36):
+            # Set X & Y Positions For Top Row of Invaders
             if i == 0:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
             elif i == 1:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
             elif i == 2:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
             elif i == 3:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
             elif i == 4:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
             elif i == 5:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.85
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+            # Set X & Y Positions For 2nd Row of Invaders
+            elif i == 6:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.80
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+            elif i == 7:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.80
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+            elif i == 8:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.80
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+            elif i == 9:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.80
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+            elif i == 10:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.80
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+            elif i == 11:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.80
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+            # Set X & Y Positions For 3rd Row of Invaders
+            elif i == 12:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+            elif i == 13:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+            elif i == 14:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+            elif i == 15:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+            elif i == 16:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+            elif i == 17:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+            # Set X & Y Positions For 4th Row of Invaders
+            elif i == 18:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.70
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+            elif i == 19:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.70
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+            elif i == 20:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.70
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+            elif i == 21:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.70
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+            elif i == 22:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.70
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+            elif i == 23:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.70
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+            # Set X & Y Positions For 5th Row of Invaders
+            elif i == 24:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+            elif i == 25:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+            elif i == 26:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+            elif i == 27:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+            elif i == 28:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+            elif i == 29:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+            # Set X & Y Positions For Bottom Row of Invaders
+            elif i == 30:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.60
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+            elif i == 31:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.60
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+            elif i == 32:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.60
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+            elif i == 33:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.60
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+            elif i == 34:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.60
+                top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+            elif i == 35:
+                top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.60
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
 
             # Instantiate Invader
