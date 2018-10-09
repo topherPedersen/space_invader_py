@@ -8,6 +8,43 @@ MOVEMENT_SPEED = 5 # Used With Keyboard
 MOVEMENT_MULTIPLIER = 5 # Used With Joystick
 DEAD_ZONE = 0.05 # Joystick Related Constant (See Arcade Documentation Regarding Joysticks)
 
+class Invader(arcade.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        # Load a left facing texture and a right facing texture.
+        # mirrored=True will mirror the image we load.
+        self.texture_left = arcade.load_texture("Invader.png", mirrored=True, scale=0.975)
+        self.texture_right = arcade.load_texture("InvaderB.png", scale=0.975)
+
+        # By default, face right.
+        self.texture = self.texture_right
+
+        # current direction (facing either "left" or "right")
+        self.facing = "left"
+    '''
+    def update(self):
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        # Figure out if we should face left or right
+        if self.change_x < 0:
+            self.texture = self.texture_left
+        if self.change_x > 0:
+            self.texture = self.texture_right
+
+        if self.left < 0:
+            self.left = 0
+        elif self.right > SCREEN_WIDTH - 1:
+            self.right = SCREEN_WIDTH - 1
+
+        if self.bottom < 0:
+            self.bottom = 0
+        elif self.top > SCREEN_HEIGHT - 1:
+            self.top = SCREEN_HEIGHT - 1
+    '''
+
+
 class MyGame(arcade.Window):
     """
     Main application class.
@@ -45,6 +82,9 @@ class MyGame(arcade.Window):
 
         # Don't show the mouse cursor
         self.set_mouse_visible(False)
+
+        # Debugging Variable
+        self.iteration = 0
 
         # Get Full Screen Width & Height
         self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
@@ -186,7 +226,7 @@ class MyGame(arcade.Window):
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
 
             # Instantiate Invader
-            invader = arcade.Sprite("Invader.png", SPRITE_SCALING_INVADER)
+            invader = Invader()
             # Position Invader
             invader.center_x = top_row_invader_x_position
             invader.center_y = top_row_invader_y_position
@@ -207,10 +247,11 @@ class MyGame(arcade.Window):
         self.invader_list.draw()
 
     def update(self, delta_time):
-        # Call update on all sprites (The sprites don't do much in this
-        # example though.)
-        self.defender_list.update()
-        self.invader_list.update()
+        # Count Number of Main Game-Loop Iterations
+        if self.iteration < 333000:
+            self.iteration = self.iteration + 1
+        else: 
+            self.iteration = 0 # Reset Number Every 333000 Iterations (prevents number from getting too large)
 
         # Prevent Defender From Moving Off Screen or "Out of Bounds"
         defenderPosition = self.defender_sprite.get_position()
@@ -218,6 +259,17 @@ class MyGame(arcade.Window):
             self.defender_sprite.change_x = 0
         elif self.rightButtonDown == True and defenderPosition[0] > self.RIGHT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
+
+        # NOTE: INVADER MOVEMENT NOT YET WORKING! (263-272)
+        # Move Invaders Every 333 Iterations of the Main Game Loop 
+        if self.iteration % 333 == 0:
+            for x in range(36):
+                if self.invader_list[x].facing == "left":
+                    self.invader_list[x].texture = self.invader_list[x].texture_right
+                    self.invader_list[x].facing = "right"
+                else:
+                    self.invader_list[x].texture = self.invader_list[x].texture_left
+                    self.invader_list[x].facing = "left"
 
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
@@ -245,6 +297,11 @@ class MyGame(arcade.Window):
             # Else, stop the defender so that he does not go off the screen
             else:
                 self.defender_sprite.change_x = 0
+
+        # Call update on all sprites (The sprites don't do much in this
+        # example though.)
+        self.defender_list.update()
+        self.invader_list.update()
 
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
