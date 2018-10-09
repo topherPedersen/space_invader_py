@@ -14,8 +14,8 @@ class Invader(arcade.Sprite):
 
         # Load a left facing texture and a right facing texture.
         # mirrored=True will mirror the image we load.
-        self.texture_left = arcade.load_texture("Invader.png", mirrored=True, scale=0.975)
-        self.texture_right = arcade.load_texture("InvaderB.png", scale=0.975)
+        self.texture_left = arcade.load_texture("Invader.png", scale=0.975)
+        self.texture_right = arcade.load_texture("Invader.png", mirrored=True, scale=0.975)
 
         # By default, face right.
         self.texture = self.texture_right
@@ -260,7 +260,6 @@ class MyGame(arcade.Window):
         elif self.rightButtonDown == True and defenderPosition[0] > self.RIGHT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
 
-        # NOTE: INVADER MOVEMENT NOT YET WORKING! (263-272)
         # Move Invaders Every 333 Iterations of the Main Game Loop 
         if self.iteration % 333 == 0:
             for x in range(36):
