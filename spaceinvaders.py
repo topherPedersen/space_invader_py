@@ -248,10 +248,10 @@ class MyGame(arcade.Window):
 
     def update(self, delta_time):
         # Count Number of Main Game-Loop Iterations
-        if self.iteration < 333000:
+        if self.iteration < 90:
             self.iteration = self.iteration + 1
         else: 
-            self.iteration = 0 # Reset Number Every 333000 Iterations (prevents number from getting too large)
+            self.iteration = 1 # Reset Number Every 333000 Iterations (prevents number from getting too large)
 
         # Prevent Defender From Moving Off Screen or "Out of Bounds"
         defenderPosition = self.defender_sprite.get_position()
@@ -261,7 +261,7 @@ class MyGame(arcade.Window):
             self.defender_sprite.change_x = 0
 
         # Move Invaders Every 333 Iterations of the Main Game Loop 
-        if self.iteration % 333 == 0:
+        if self.iteration == 30 or self.iteration == 60 or self.iteration == 90:
             for x in range(36):
                 if self.invader_list[x].facing == "left":
                     self.invader_list[x].texture = self.invader_list[x].texture_right
