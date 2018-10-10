@@ -24,36 +24,11 @@ class Invader(arcade.Sprite):
         self.facing = "left"
     '''
     def update(self):
-        self.center_x += self.change_x
-        self.center_y += self.change_y
-
-        # Figure out if we should face left or right
-        if self.change_x < 0:
-            self.texture = self.texture_left
-        if self.change_x > 0:
-            self.texture = self.texture_right
-
-        if self.left < 0:
-            self.left = 0
-        elif self.right > SCREEN_WIDTH - 1:
-            self.right = SCREEN_WIDTH - 1
-
-        if self.bottom < 0:
-            self.bottom = 0
-        elif self.top > SCREEN_HEIGHT - 1:
-            self.top = SCREEN_HEIGHT - 1
+        # update stuf here...
     '''
 
 
 class MyGame(arcade.Window):
-    """
-    Main application class.
-
-    NOTE: Go ahead and delete the methods you don't need.
-    If you do need a method, delete the 'pass' and replace it
-    with your own code. Don't leave 'pass' in this program.
-    """
-
     def __init__(self):
         super().__init__(fullscreen=True, resizable=True)
 
@@ -68,7 +43,7 @@ class MyGame(arcade.Window):
         else:
             print("There are no Joysticks")
             self.joystick = None
-        
+
         # Set Background Color
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -85,6 +60,9 @@ class MyGame(arcade.Window):
 
         # Debugging Variable
         self.iteration = 0
+
+        # Create Game State Variables
+        self.invaderDirection = "left"
 
         # Get Full Screen Width & Height
         self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
@@ -250,7 +228,7 @@ class MyGame(arcade.Window):
         # Count Number of Main Game-Loop Iterations
         if self.iteration < 90:
             self.iteration = self.iteration + 1
-        else: 
+        else:
             self.iteration = 1 # Reset Number Every 333000 Iterations (prevents number from getting too large)
 
         # Prevent Defender From Moving Off Screen or "Out of Bounds"
@@ -260,15 +238,22 @@ class MyGame(arcade.Window):
         elif self.rightButtonDown == True and defenderPosition[0] > self.RIGHT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
 
-        # Move Invaders Every 333 Iterations of the Main Game Loop 
+        # Move Invaders Every 30 Iterations of the Main Game Loop
         if self.iteration == 30 or self.iteration == 60 or self.iteration == 90:
             for x in range(36):
+                # Flip Image of Invader
                 if self.invader_list[x].facing == "left":
                     self.invader_list[x].texture = self.invader_list[x].texture_right
                     self.invader_list[x].facing = "right"
                 else:
                     self.invader_list[x].texture = self.invader_list[x].texture_left
                     self.invader_list[x].facing = "left"
+                # Move Invader (Horizontally)
+                if self.invaderDirection == "left":
+                    self.invader_list[x].change_x = -25
+        else:
+            for x in range(36):
+                self.invader_list[x].change_x = 0
 
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
