@@ -1,5 +1,7 @@
 import random
 import arcade
+import os
+
 
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
@@ -7,6 +9,11 @@ SPRITE_SCALING_INVADER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwante
 MOVEMENT_SPEED = 5 # Used With Keyboard
 MOVEMENT_MULTIPLIER = 5 # Used With Joystick
 DEAD_ZONE = 0.05 # Joystick Related Constant (See Arcade Documentation Regarding Joysticks)
+LAZER_SPEED = 5
+
+class Lazer(arcade.Sprite):
+    def update(self):
+        self.center_y += LAZER_SPEED
 
 class Invader(arcade.Sprite):
     def __init__(self):
@@ -51,6 +58,7 @@ class MyGame(arcade.Window):
         # and set them to None
         self.defender_list = None
         self.invader_list = None
+        self.lazer_list = None
 
         # Set up the player info
         self.defender_sprite = None
@@ -78,6 +86,7 @@ class MyGame(arcade.Window):
         # Create Sprite Lists
         self.defender_list = arcade.SpriteList()
         self.invader_list = arcade.SpriteList()
+        self.lazer_list = arcade.SpriteList()
 
         # Create Defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
@@ -223,6 +232,7 @@ class MyGame(arcade.Window):
         # Call draw() on all your sprite lists below
         self.defender_list.draw()
         self.invader_list.draw()
+        self.lazer_list.draw()
 
     def update(self, delta_time):
         # Count Number of Main Game-Loop Iterations
@@ -392,7 +402,15 @@ class MyGame(arcade.Window):
             self.rightButtonDown = False
 
     def on_joybutton_press(self, joystick, button):
-        print("Button {} down".format(button))
+        # Instantiate Lazer
+        lazer = Lazer("Lazer.png", 0.975)
+        # Position Lazer Beam
+        lazer.center_x = self.defender_sprite.center_x
+        lazer.bottom = self.defender_sprite.top
+        # Add Lazer Beam to lazer_list
+        self.lazer_list.append(lazer)
+
+
 
     def on_joybutton_release(self, joystick, button):
         print("Button {} up".format(button))
