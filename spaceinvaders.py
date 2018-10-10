@@ -240,8 +240,8 @@ class MyGame(arcade.Window):
 
         # MOVE INVADERS
         # First, Move Invaders Left 10 times
-        if (self.iteration == 30 
-            or self.iteration == 60 
+        if (self.iteration == 30
+            or self.iteration == 60
             or self.iteration == 90
             or self.iteration == 120
             or self.iteration == 150
@@ -261,9 +261,13 @@ class MyGame(arcade.Window):
                     # Move Invader (Horizontally)
                     if self.invaderDirection == "left":
                         self.invader_list[x].change_x = -25
+                # When Invaders Reach Left Border, Move Invaders Down
+                for x in range(36):
+                    if self.iteration == 300:
+                        self.invader_list[x].change_y = -25
         # Next, March Invaders Right 20 Times
-        elif (self.iteration == 330 
-            or self.iteration == 360 
+        elif (self.iteration == 330
+            or self.iteration == 360
             or self.iteration == 390
             or self.iteration == 420
             or self.iteration == 450
@@ -272,8 +276,8 @@ class MyGame(arcade.Window):
             or self.iteration == 540
             or self.iteration == 570
             or self.iteration == 600
-            or self.iteration == 630 
-            or self.iteration == 660 
+            or self.iteration == 630
+            or self.iteration == 660
             or self.iteration == 690
             or self.iteration == 720
             or self.iteration == 750
@@ -293,9 +297,13 @@ class MyGame(arcade.Window):
                     # Move Invader (Horizontally)
                     if self.invaderDirection == "left":
                         self.invader_list[x].change_x = 25
+                # When Invaders Reach Right Border, Move Invaders Down
+                for x in range(36):
+                    if self.iteration == 900:
+                        self.invader_list[x].change_y = -25
         # Last, March Invaders Left Right 10 Times Back To The Center of the Screen
-        elif (self.iteration == 930 
-            or self.iteration == 960 
+        elif (self.iteration == 930
+            or self.iteration == 960
             or self.iteration == 990
             or self.iteration == 1020
             or self.iteration == 1050
@@ -318,6 +326,7 @@ class MyGame(arcade.Window):
         else:
             for x in range(36):
                 self.invader_list[x].change_x = 0
+                self.invader_list[x].change_y = 0
 
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
