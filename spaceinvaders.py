@@ -226,7 +226,7 @@ class MyGame(arcade.Window):
 
     def update(self, delta_time):
         # Count Number of Main Game-Loop Iterations
-        if self.iteration < 90:
+        if self.iteration < 1200:
             self.iteration = self.iteration + 1
         else:
             self.iteration = 1 # Reset Number Every 333000 Iterations (prevents number from getting too large)
@@ -238,19 +238,83 @@ class MyGame(arcade.Window):
         elif self.rightButtonDown == True and defenderPosition[0] > self.RIGHT_BOUNDARY_X:
             self.defender_sprite.change_x = 0
 
-        # Move Invaders Every 30 Iterations of the Main Game Loop
-        if self.iteration == 30 or self.iteration == 60 or self.iteration == 90:
-            for x in range(36):
-                # Flip Image of Invader
-                if self.invader_list[x].facing == "left":
-                    self.invader_list[x].texture = self.invader_list[x].texture_right
-                    self.invader_list[x].facing = "right"
-                else:
-                    self.invader_list[x].texture = self.invader_list[x].texture_left
-                    self.invader_list[x].facing = "left"
-                # Move Invader (Horizontally)
-                if self.invaderDirection == "left":
-                    self.invader_list[x].change_x = -25
+        # MOVE INVADERS
+        # First, Move Invaders Left 10 times
+        if (self.iteration == 30 
+            or self.iteration == 60 
+            or self.iteration == 90
+            or self.iteration == 120
+            or self.iteration == 150
+            or self.iteration == 180
+            or self.iteration == 210
+            or self.iteration == 240
+            or self.iteration == 270
+            or self.iteration == 300):
+                for x in range(36):
+                    # Flip Image of Invader
+                    if self.invader_list[x].facing == "left":
+                        self.invader_list[x].texture = self.invader_list[x].texture_right
+                        self.invader_list[x].facing = "right"
+                    else:
+                        self.invader_list[x].texture = self.invader_list[x].texture_left
+                        self.invader_list[x].facing = "left"
+                    # Move Invader (Horizontally)
+                    if self.invaderDirection == "left":
+                        self.invader_list[x].change_x = -25
+        # Next, March Invaders Right 20 Times
+        elif (self.iteration == 330 
+            or self.iteration == 360 
+            or self.iteration == 390
+            or self.iteration == 420
+            or self.iteration == 450
+            or self.iteration == 480
+            or self.iteration == 510
+            or self.iteration == 540
+            or self.iteration == 570
+            or self.iteration == 600
+            or self.iteration == 630 
+            or self.iteration == 660 
+            or self.iteration == 690
+            or self.iteration == 720
+            or self.iteration == 750
+            or self.iteration == 780
+            or self.iteration == 810
+            or self.iteration == 840
+            or self.iteration == 870
+            or self.iteration == 900):
+                for x in range(36):
+                    # Flip Image of Invader
+                    if self.invader_list[x].facing == "left":
+                        self.invader_list[x].texture = self.invader_list[x].texture_right
+                        self.invader_list[x].facing = "right"
+                    else:
+                        self.invader_list[x].texture = self.invader_list[x].texture_left
+                        self.invader_list[x].facing = "left"
+                    # Move Invader (Horizontally)
+                    if self.invaderDirection == "left":
+                        self.invader_list[x].change_x = 25
+        # Last, March Invaders Left Right 10 Times Back To The Center of the Screen
+        elif (self.iteration == 930 
+            or self.iteration == 960 
+            or self.iteration == 990
+            or self.iteration == 1020
+            or self.iteration == 1050
+            or self.iteration == 1080
+            or self.iteration == 1110
+            or self.iteration == 1140
+            or self.iteration == 1170
+            or self.iteration == 1200):
+                for x in range(36):
+                    # Flip Image of Invader
+                    if self.invader_list[x].facing == "left":
+                        self.invader_list[x].texture = self.invader_list[x].texture_right
+                        self.invader_list[x].facing = "right"
+                    else:
+                        self.invader_list[x].texture = self.invader_list[x].texture_left
+                        self.invader_list[x].facing = "left"
+                    # Move Invader (Horizontally)
+                    if self.invaderDirection == "left":
+                        self.invader_list[x].change_x = -25
         else:
             for x in range(36):
                 self.invader_list[x].change_x = 0
