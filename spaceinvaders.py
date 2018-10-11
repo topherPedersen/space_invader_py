@@ -338,6 +338,22 @@ class MyGame(arcade.Window):
                 self.invader_list[x].change_x = 0
                 self.invader_list[x].change_y = 0
 
+        # LAZER BEAM CODE GOES HERE
+        self.lazer_list.update()
+        for lazer in self.lazer_list:
+            # Check this bullet to see if it hit a coin
+            hit_list = arcade.check_for_collision_with_list(lazer, self.invader_list)
+            # If it did, get rid of the bullet
+            if len(hit_list) > 0:
+                lazer.kill()
+            # For every coin we hit, add to score and remove the coin
+            for invader in hit_list:
+                invader.kill()
+            # If the bullet flies off-screen, remove it.
+            if lazer.bottom > self.FULL_SCREEN_HEIGHT:
+                lazer.kill()
+        # END LAZER BEAM CODE
+
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
         # is pressed is contained in the on_key_press and on_key_release
