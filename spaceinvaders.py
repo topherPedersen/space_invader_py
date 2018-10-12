@@ -389,7 +389,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].facing = "left"
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
-                            self.invader_list[x].change_x = -25
+                            self.invader_list[x].change_x = -50
                     # When Invaders Reach Left Border, Move Invaders Down
                     if self.iteration == 300: 
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
@@ -427,7 +427,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].facing = "left"
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
-                            self.invader_list[x].change_x = 25
+                            self.invader_list[x].change_x = 50
                     # When Invaders Reach Right Border, Move Invaders Down
                     if self.iteration == 300: 
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
@@ -455,7 +455,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].facing = "left"
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
-                            self.invader_list[x].change_x = -25
+                            self.invader_list[x].change_x = -50
             else:
                 for x in range(len(self.invader_list)):
                     self.invader_list[x].change_x = 0
@@ -495,7 +495,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].facing = "left"
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
-                            self.invader_list[x].change_x = -25
+                            self.invader_list[x].change_x = -150
                     # When Invaders Reach Left Border, Move Invaders Down
                     if self.iteration == 300: 
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
@@ -533,7 +533,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].facing = "left"
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
-                            self.invader_list[x].change_x = 25
+                            self.invader_list[x].change_x = 150
                     # When Invaders Reach Right Border, Move Invaders Down
                     if self.iteration == 300: 
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
@@ -561,7 +561,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].facing = "left"
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
-                            self.invader_list[x].change_x = -25
+                            self.invader_list[x].change_x = -150
             else:
                 for x in range(len(self.invader_list)):
                     self.invader_list[x].change_x = 0
