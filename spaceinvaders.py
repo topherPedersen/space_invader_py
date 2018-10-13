@@ -240,14 +240,17 @@ class MyGame(arcade.Window):
     def update(self, delta_time):
         # Determine How Fast to Move Invaders Depending on
         # How Far They Have Advanced Down the Screen
-        if self.invader_advancements <= 6:
+        
+        if self.invader_advancements <= 3:
             self.invader_speed = 1
-        elif self.invader_advancements == 7 or self.invader_advancements == 8:
+        elif self.invader_advancements == 4 or self.invader_advancements == 5 or self.invader_advancements == 6:
             self.invader_speed = 2
-        elif self.invader_advancements == 9 or self.invader_advancements == 10:
+        elif self.invader_advancements == 7 or self.invader_advancements == 8:
             self.invader_speed = 3
         else:
             self.invader_speed = 4
+        
+        # self.invader_speed = 4
 
         # Count Number of Main Game-Loop Iterations
         if self.invader_speed == 1:
