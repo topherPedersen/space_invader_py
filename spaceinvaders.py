@@ -255,7 +255,7 @@ class MyGame(arcade.Window):
     def update(self, delta_time):
         # Determine How Fast to Move Invaders Depending on
         # How Far They Have Advanced Down the Screen
-        
+
         if self.invader_advancements <= 2:
             self.invader_speed = 1
         elif self.invader_advancements == 3 or self.invader_advancements == 4 or self.invader_advancements == 5:
@@ -264,7 +264,7 @@ class MyGame(arcade.Window):
             self.invader_speed = 3
         else:
             self.invader_speed = 4
-        
+
         # self.invader_speed = 4
 
         # Count Number of Main Game-Loop Iterations
@@ -306,7 +306,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].change_x = -25
                     # When Invaders Reach Left Border, Move Invaders Down
                     '''
-                    if self.iteration == 300: 
+                    if self.iteration == 300:
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     '''
                     for x in range(len(self.invader_list)):
@@ -346,7 +346,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].change_x = 25
                     # When Invaders Reach Right Border, Move Invaders Down
                     '''
-                    if self.iteration == 900: 
+                    if self.iteration == 900:
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     '''
                     for x in range(len(self.invader_list)):
@@ -374,7 +374,7 @@ class MyGame(arcade.Window):
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
                             self.invader_list[x].change_x = -25
-                    if self.iteration == 1200: 
+                    if self.iteration == 1200:
                         # When Invaders Reach The Middle of the Screen, Increment The Number of Invader Advancements
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
             else:
@@ -489,7 +489,7 @@ class MyGame(arcade.Window):
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
                             self.invader_list[x].change_x = -25
-                    if self.iteration == 600: 
+                    if self.iteration == 600:
                         # When Invaders Reach The Middle of the Screen, Increment The Number of Invader Advancements
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
             else:
@@ -536,7 +536,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].change_x = -25
                     # When Invaders Reach Left Border, Move Invaders Down
                     '''
-                    if self.iteration == 50: 
+                    if self.iteration == 50:
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     '''
                     for x in range(len(self.invader_list)):
@@ -576,7 +576,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].change_x = 25
                     # When Invaders Reach Right Border, Move Invaders Down
                     '''
-                    if self.iteration == 150: 
+                    if self.iteration == 150:
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     '''
                     for x in range(len(self.invader_list)):
@@ -604,7 +604,7 @@ class MyGame(arcade.Window):
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
                             self.invader_list[x].change_x = -25
-                    if self.iteration == 200: 
+                    if self.iteration == 200:
                         # When Invaders Reach The Middle of the Screen, Increment The Number of Invader Advancements
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
             else:
@@ -647,7 +647,7 @@ class MyGame(arcade.Window):
                             self.invader_list[x].change_x = -50
                     # When Invaders Reach Left Border, Move Invaders Down
                     '''
-                    if self.iteration == 10: 
+                    if self.iteration == 10:
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     '''
                     for x in range(len(self.invader_list)):
@@ -676,7 +676,7 @@ class MyGame(arcade.Window):
                         if self.invaderDirection == "left":
                             self.invader_list[x].change_x = 50
                     # When Invaders Reach Right Border, Move Invaders Down
-                    if self.iteration == 30: 
+                    if self.iteration == 30:
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     for x in range(len(self.invader_list)):
                         if self.iteration == 30:
@@ -698,7 +698,7 @@ class MyGame(arcade.Window):
                         # Move Invader (Horizontally)
                         if self.invaderDirection == "left":
                             self.invader_list[x].change_x = -50
-                    if self.iteration == 40: 
+                    if self.iteration == 40:
                         # When Invaders Reach The Middle of the Screen, Increment The Number of Invader Advancements
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
             else:
@@ -772,6 +772,14 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.defender_sprite.change_x = MOVEMENT_SPEED
             self.rightButtonDown = True
+        elif key == arcade.key.SPACE:
+            # Instantiate Lazer
+            lazer = Lazer("Lazer.png", 0.975)
+            # Position Lazer Beam
+            lazer.center_x = self.defender_sprite.center_x
+            lazer.bottom = self.defender_sprite.top
+            # Add Lazer Beam to lazer_list
+            self.lazer_list.append(lazer)
 
     def on_key_release(self, key, key_modifiers):
         """
