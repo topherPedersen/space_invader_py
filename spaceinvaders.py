@@ -89,6 +89,7 @@ class MyGame(arcade.Window):
         self.defender_list = arcade.SpriteList()
         self.invader_list = arcade.SpriteList()
         self.lazer_list = arcade.SpriteList()
+        self.shield_list = arcade.SpriteList()
 
         # Create Defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
@@ -96,6 +97,20 @@ class MyGame(arcade.Window):
         self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.25 # Position
         self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
 
+        # Create Shields
+        for i in range(3):
+            # Instantiate Shield
+            shield = arcade.Sprite("Shield.png", SPRITE_SCALING_PLAYER)
+            # Shield Invader
+            if i == 0:
+                shield.center_x = (self.FULL_SCREEN_WIDTH * 0.5) * 0.67
+            elif i == 1:
+                shield.center_x = self.FULL_SCREEN_WIDTH * 0.5
+            elif i == 2:
+                shield.center_x = (self.FULL_SCREEN_WIDTH * 0.5) * 1.33
+            shield.center_y = self.FULL_SCREEN_HEIGHT * 0.334
+            # Add Shield to Shield List
+            self.shield_list.append(shield)
 
         # Create Invaders
         for i in range(36):
@@ -235,6 +250,7 @@ class MyGame(arcade.Window):
         self.defender_list.draw()
         self.invader_list.draw()
         self.lazer_list.draw()
+        self.shield_list.draw()
 
     def update(self, delta_time):
         # Determine How Fast to Move Invaders Depending on
