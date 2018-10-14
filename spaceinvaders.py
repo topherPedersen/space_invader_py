@@ -14,6 +14,10 @@ class Lazer(arcade.Sprite):
     def update(self):
         self.center_y += LAZER_SPEED
 
+class DeathRay(arcade.Sprite):
+    def update(self):
+        self.center_y -= LAZER_SPEED
+
 class Invader(arcade.Sprite):
     def __init__(self, imageFilenameA, imageFilenameB):
         super().__init__()
@@ -58,6 +62,7 @@ class MyGame(arcade.Window):
         self.defender_list = None
         self.invader_list = None
         self.lazer_list = None
+        self.death_ray_list = None
 
         # Set up the player info
         self.defender_sprite = None
@@ -90,6 +95,7 @@ class MyGame(arcade.Window):
         self.invader_list = arcade.SpriteList()
         self.lazer_list = arcade.SpriteList()
         self.shield_list = arcade.SpriteList()
+        self.death_ray_list = arcade.SpriteList()
 
         # Create Defender
         self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
@@ -323,6 +329,7 @@ class MyGame(arcade.Window):
         self.invader_list.draw()
         self.lazer_list.draw()
         self.shield_list.draw()
+        self.death_ray_list.draw()
 
     def update(self, delta_time):
         # Determine How Fast to Move Invaders Depending on
@@ -846,20 +853,29 @@ class MyGame(arcade.Window):
                                 low_man_ycor[i] = ycor
                                 low_man_index[i] = j
             # FOR TESTING, FIRE A LAZER BEAM FROM ALL LOW MAN INVADERS
-            '''
             for i in range(len(low_man_index)):
+                '''
                 # Instantiate Lazer
                 lazer = Lazer("Lazer.png", 0.975)
                 # Position Lazer Beam
-                lazer.center_x = self.invader_list[low_man_index[i]]
+                index = low_man_index[i]
+                lazer.center_x = self.invader_list[index]
                 # lazer.bottom = self.invader_list[low_man_index[i]].bottom
                 lazer.bottom = 250
                 lazer.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
                 # Add Lazer Beam to lazer_list
                 self.lazer_list.append(lazer)
-                # self.invader_list[low_man_index[i]].kill()
-            '''
-            self.invader_list[low_man_index[0]].kill()
+            # self.invader_list[low_man_index[0]].kill()
+                '''
+                        # Instantiate Lazer
+                deathRay = DeathRay("Lazer.png", 0.975)
+                # Position Lazer Beam
+                selectedInvader = self.invader_list[i]
+                deathRay.center_x = selectedInvader.center_x
+                deathRay.bottom = selectedInvader.top
+                deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
+                # Add Lazer Beam to lazer_list
+                self.death_ray_list.append(deathRay)
         # END EXPERIMENTAL INVADER LAZER BEAM CODE
 
 
