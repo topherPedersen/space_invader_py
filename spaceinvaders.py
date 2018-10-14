@@ -21,7 +21,7 @@ class Invader(arcade.Sprite):
         # Load a left facing texture and a right facing texture.
         # mirrored=True will mirror the image we load.
         self.texture_left = arcade.load_texture(imageFilenameA, scale=0.975)
-        self.texture_right = arcade.load_texture(imageFilenameB, mirrored=True, scale=0.975)
+        self.texture_right = arcade.load_texture(imageFilenameB, scale=0.975)
 
         # By default, face right.
         self.texture = self.texture_right
