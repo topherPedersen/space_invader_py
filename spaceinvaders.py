@@ -830,16 +830,19 @@ class MyGame(arcade.Window):
             low_man_index = [] # create a list which will hold the array index of the "low man" invader for any given column
             low_man_ycor = []
             for i in range(len(x_position)):
-                low_man_index.append(0)
-                low_man_ycor.append(9999)
+                low_man_index.append(False)
+                low_man_ycor.append(99999999)
             if len(x_position) > 0:
+                # loop through each unique column of invaders
                 for i in range(len(x_position)):
                     addLowMan = True
                     for j in range(len(self.invader_list)):
-                        xcor = self.invader_list[j].get_position()
+                        coordinate = self.invader_list[j].get_position()
+                        xcor = coordinate[0]
+                        ycor = coordinate[1]
+                        # Identify Invader From Column Which We Are Analyzing
                         if xcor == x_position[i]:
-                            ycor = self.invader_list[j].get_position()
-                            if ycor > low_man_ycor[i]:
+                            if ycor < low_man_ycor[i]:
                                 low_man_ycor[i] = ycor
                                 low_man_index[i] = j
             # FOR TESTING, FIRE A LAZER BEAM FROM ALL LOW MAN INVADERS
