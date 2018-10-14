@@ -860,7 +860,7 @@ class MyGame(arcade.Window):
                 index = bottom_invader_index[i]
                 selectedInvader = self.invader_list[index]
                 deathRay.center_x = selectedInvader.center_x
-                deathRay.bottom = selectedInvader.top
+                deathRay.top = selectedInvader.bottom
                 deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
                 # Add Lazer Beam to lazer_list
                 self.death_ray_list.append(deathRay)
