@@ -815,7 +815,57 @@ class MyGame(arcade.Window):
         # EXPERIMENTAL INVADER LAZER BEAM CODE ---------------------------------------------->
         # Have Invaders Randomly Shoot Lazer Beams
         if random.randint(1, 20) == random.randint(1, 20):
+            # Get the x-coordinate of every invader
+            x_coordinate = []
+            for i in range(len(self.invader_list)):
+                position = self.invader_list[i].get_position()
+                x = position[0]
+                x_coordinate.append(x)
+            unique_x_coordinate = []
+            for i in range(len(x_coordinate)):
+                if len(unique_x_coordinate) == 0:
+                    unique_x_coordinate.append(x_coordinate[i])
+                else:
+                    addCoordinate = True
+                    for j in range(len(unique_x_coordinate)):
+                        if x_coordinate[i] == unique_x_coordinate[j]:
+                            addCoordinate = False
+                    if addCoordinate == True:
+                        unique_x_coordinate.append(x_coordinate[i])  
+            # For Each Column (unique_x_coordinate), Find the Bottom Invader (lowest y-coordinate)
+            bottom_invader_index = []
+            bottom_invader_xcor = []
+            bottom_invader_ycor = []
+            for i in range(len(unique_x_coordinate)):
+                bottom_invader_index.append(False)
+                bottom_invader_xcor.append(unique_x_coordinate[i])
+                bottom_invader_ycor.append(99999999)
+            for i in range(len(unique_x_coordinate)):  
+                for j in range(len(self.invader_list)):
+                    coordinate = self.invader_list[j].get_position()
+                    xcor = coordinate[0]
+                    ycor = coordinate[1]
+                    if xcor == unique_x_coordinate[i]:
+                        isInColumnOfInterest = True
+                    else:
+                        isInColumnOfInterest = False
+                    if isInColumnOfInterest == True:
+                        if ycor < bottom_invader_ycor[i]:
+                            bottom_invader_index[i] = j
+                            bottom_invader_ycor[i] = ycor
+            for i in range(len(unique_x_coordinate)):  
+                # Instantiate Lazer
+                deathRay = DeathRay("Lazer.png", 0.975)
+                # Position Lazer Beam
+                index = bottom_invader_index[i]
+                selectedInvader = self.invader_list[index]
+                deathRay.center_x = selectedInvader.center_x
+                deathRay.bottom = selectedInvader.top
+                deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
+                # Add Lazer Beam to lazer_list
+                self.death_ray_list.append(deathRay)
             # Cycle Through List of Invaders, And Gather All of the Unique X Coordinates
+            '''
             x_position = []
             for i in range(len(self.invader_list)):
                 position = self.invader_list[i].get_position()
@@ -854,20 +904,7 @@ class MyGame(arcade.Window):
                                 low_man_index[i] = j
             # FOR TESTING, FIRE A LAZER BEAM FROM ALL LOW MAN INVADERS
             for i in range(len(low_man_index)):
-                '''
                 # Instantiate Lazer
-                lazer = Lazer("Lazer.png", 0.975)
-                # Position Lazer Beam
-                index = low_man_index[i]
-                lazer.center_x = self.invader_list[index]
-                # lazer.bottom = self.invader_list[low_man_index[i]].bottom
-                lazer.bottom = 250
-                lazer.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
-                # Add Lazer Beam to lazer_list
-                self.lazer_list.append(lazer)
-            # self.invader_list[low_man_index[0]].kill()
-                '''
-                        # Instantiate Lazer
                 deathRay = DeathRay("Lazer.png", 0.975)
                 # Position Lazer Beam
                 selectedInvader = self.invader_list[i]
@@ -876,6 +913,7 @@ class MyGame(arcade.Window):
                 deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
                 # Add Lazer Beam to lazer_list
                 self.death_ray_list.append(deathRay)
+                '''
         # END EXPERIMENTAL INVADER LAZER BEAM CODE
 
 
