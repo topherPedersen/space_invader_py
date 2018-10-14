@@ -15,13 +15,13 @@ class Lazer(arcade.Sprite):
         self.center_y += LAZER_SPEED
 
 class Invader(arcade.Sprite):
-    def __init__(self):
+    def __init__(self, imageFilenameA, imageFilenameB):
         super().__init__()
 
         # Load a left facing texture and a right facing texture.
         # mirrored=True will mirror the image we load.
-        self.texture_left = arcade.load_texture("Invader.png", scale=0.975)
-        self.texture_right = arcade.load_texture("Invader.png", mirrored=True, scale=0.975)
+        self.texture_left = arcade.load_texture(imageFilenameA, scale=0.975)
+        self.texture_right = arcade.load_texture(imageFilenameB, mirrored=True, scale=0.975)
 
         # By default, face right.
         self.texture = self.texture_right
@@ -118,119 +118,191 @@ class MyGame(arcade.Window):
             if i == 0:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+                imageFilenameA = "InvaderRow6A.png"
+                imageFilenameB = "InvaderRow6B.png"
             elif i == 1:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+                imageFilenameA = "InvaderRow6A.png"
+                imageFilenameB = "InvaderRow6B.png"
             elif i == 2:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+                imageFilenameA = "InvaderRow6A.png"
+                imageFilenameB = "InvaderRow6B.png"
             elif i == 3:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+                imageFilenameA = "InvaderRow6A.png"
+                imageFilenameB = "InvaderRow6B.png"
             elif i == 4:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+                imageFilenameA = "InvaderRow6A.png"
+                imageFilenameB = "InvaderRow6B.png"
             elif i == 5:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.75
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+                imageFilenameA = "InvaderRow6A.png"
+                imageFilenameB = "InvaderRow6B.png"
             # Set X & Y Positions For 2nd Row of Invaders
             elif i == 6:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.7
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+                imageFilenameA = "InvaderRow5A.png"
+                imageFilenameB = "InvaderRow5B.png"
             elif i == 7:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.7
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+                imageFilenameA = "InvaderRow5A.png"
+                imageFilenameB = "InvaderRow5B.png"
             elif i == 8:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.7
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+                imageFilenameA = "InvaderRow5A.png"
+                imageFilenameB = "InvaderRow5B.png"
             elif i == 9:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.7
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+                imageFilenameA = "InvaderRow5A.png"
+                imageFilenameB = "InvaderRow5B.png"
             elif i == 10:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.7
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+                imageFilenameA = "InvaderRow5A.png"
+                imageFilenameB = "InvaderRow5B.png"
             elif i == 11:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.7
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+                imageFilenameA = "InvaderRow5A.png"
+                imageFilenameB = "InvaderRow5B.png"
             # Set X & Y Positions For 3rd Row of Invaders
             elif i == 12:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+                imageFilenameA = "InvaderRow4A.png"
+                imageFilenameB = "InvaderRow4B.png"
             elif i == 13:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+                imageFilenameA = "InvaderRow4A.png"
+                imageFilenameB = "InvaderRow4B.png"
             elif i == 14:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+                imageFilenameA = "InvaderRow4A.png"
+                imageFilenameB = "InvaderRow4B.png"
             elif i == 15:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+                imageFilenameA = "InvaderRow4A.png"
+                imageFilenameB = "InvaderRow4B.png"
             elif i == 16:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+                imageFilenameA = "InvaderRow4A.png"
+                imageFilenameB = "InvaderRow4B.png"
             elif i == 17:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.65
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+                imageFilenameA = "InvaderRow4A.png"
+                imageFilenameB = "InvaderRow4B.png"
             # Set X & Y Positions For 4th Row of Invaders
             elif i == 18:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.6
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+                imageFilenameA = "InvaderRow3A.png"
+                imageFilenameB = "InvaderRow3B.png"
             elif i == 19:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.6
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+                imageFilenameA = "InvaderRow3A.png"
+                imageFilenameB = "InvaderRow3B.png"
             elif i == 20:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.6
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+                imageFilenameA = "InvaderRow3A.png"
+                imageFilenameB = "InvaderRow3B.png"
             elif i == 21:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.6
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+                imageFilenameA = "InvaderRow3A.png"
+                imageFilenameB = "InvaderRow3B.png"
             elif i == 22:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.6
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+                imageFilenameA = "InvaderRow3A.png"
+                imageFilenameB = "InvaderRow3B.png"
             elif i == 23:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.6
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+                imageFilenameA = "InvaderRow3A.png"
+                imageFilenameB = "InvaderRow3B.png"
             # Set X & Y Positions For 5th Row of Invaders
             elif i == 24:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.55
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+                imageFilenameA = "InvaderRow2A.png"
+                imageFilenameB = "InvaderRow2B.png"
             elif i == 25:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.55
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+                imageFilenameA = "InvaderRow2A.png"
+                imageFilenameB = "InvaderRow2B.png"
             elif i == 26:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.55
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+                imageFilenameA = "InvaderRow2A.png"
+                imageFilenameB = "InvaderRow2B.png"
             elif i == 27:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.55
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+                imageFilenameA = "InvaderRow2A.png"
+                imageFilenameB = "InvaderRow2B.png"
             elif i == 28:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.55
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+                imageFilenameA = "InvaderRow2A.png"
+                imageFilenameB = "InvaderRow2B.png"
             elif i == 29:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.55
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+                imageFilenameA = "InvaderRow2A.png"
+                imageFilenameB = "InvaderRow2B.png"
             # Set X & Y Positions For Bottom Row of Invaders
             elif i == 30:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.5
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.333
+                imageFilenameA = "InvaderRow1A.png"
+                imageFilenameB = "InvaderRow1B.png"
             elif i == 31:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.5
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.400
+                imageFilenameA = "InvaderRow1A.png"
+                imageFilenameB = "InvaderRow1B.png"
             elif i == 32:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.5
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.466
+                imageFilenameA = "InvaderRow1A.png"
+                imageFilenameB = "InvaderRow1B.png"
             elif i == 33:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.5
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.533
+                imageFilenameA = "InvaderRow1A.png"
+                imageFilenameB = "InvaderRow1B.png"
             elif i == 34:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.5
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.599
+                imageFilenameA = "InvaderRow1A.png"
+                imageFilenameB = "InvaderRow1B.png"
             elif i == 35:
                 top_row_invader_y_position = self.FULL_SCREEN_HEIGHT * 0.5
                 top_row_invader_x_position = self.FULL_SCREEN_WIDTH * 0.667
+                imageFilenameA = "InvaderRow1A.png"
+                imageFilenameB = "InvaderRow1B.png"
 
             # Instantiate Invader
-            invader = Invader()
+            invader = Invader(imageFilenameA, imageFilenameB)
             # Position Invader
             invader.center_x = top_row_invader_x_position
             invader.center_y = top_row_invader_y_position
