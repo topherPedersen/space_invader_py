@@ -948,6 +948,7 @@ class MyGame(arcade.Window):
         # example though.)
         self.defender_list.update()
         self.invader_list.update()
+        self.death_ray_list.update()
 
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
