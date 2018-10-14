@@ -870,17 +870,16 @@ class MyGame(arcade.Window):
                             if ycor < bottom_invader_ycor[i]:
                                 bottom_invader_index[i] = j
                                 bottom_invader_ycor[i] = ycor
-                for i in range(len(unique_x_coordinate)):  
-                    # Instantiate Lazer
-                    deathRay = DeathRay("Lazer.png", 0.975)
-                    # Position Lazer Beam
-                    index = bottom_invader_index[i]
-                    selectedInvader = self.invader_list[index]
-                    deathRay.center_x = selectedInvader.center_x
-                    deathRay.top = selectedInvader.bottom
-                    deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
-                    # Add Lazer Beam to lazer_list
-                    self.death_ray_list.append(deathRay)
+                # Select One of the Bottom Invaders Randomly, and Fire a Death Ray
+                randomNumber = random.randint(0, len(unique_x_coordinate) - 1)
+                deathRay = DeathRay("Lazer.png", 0.975)
+                index = bottom_invader_index[randomNumber]
+                selectedInvader = self.invader_list[index]
+                deathRay.center_x = selectedInvader.center_x
+                deathRay.top = selectedInvader.bottom
+                deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
+                # Add Lazer Beam to lazer_list
+                self.death_ray_list.append(deathRay)
 
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
