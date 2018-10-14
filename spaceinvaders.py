@@ -838,7 +838,7 @@ class MyGame(arcade.Window):
             low_man_ycor = []
             for i in range(len(x_position)):
                 low_man_index.append(False)
-                low_man_ycor.append(99999999)
+                low_man_ycor.append(0)
             if len(x_position) > 0:
                 # loop through each unique column of invaders
                 for i in range(len(x_position)):
@@ -849,7 +849,7 @@ class MyGame(arcade.Window):
                         ycor = coordinate[1]
                         # Identify Invader From Column Which We Are Analyzing
                         if xcor == x_position[i]:
-                            if ycor < low_man_ycor[i]:
+                            if ycor > low_man_ycor[i]:
                                 low_man_ycor[i] = ycor
                                 low_man_index[i] = j
             # FOR TESTING, FIRE A LAZER BEAM FROM ALL LOW MAN INVADERS
