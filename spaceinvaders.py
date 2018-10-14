@@ -805,6 +805,59 @@ class MyGame(arcade.Window):
             for lazer in hit_list:
                 lazer.kill()
 
+        # EXPERIMENTAL INVADER LAZER BEAM CODE ---------------------------------------------->
+        # Have Invaders Randomly Shoot Lazer Beams
+        if random.randint(1, 20) == random.randint(1, 20):
+            # Cycle Through List of Invaders, And Gather All of the Unique X Coordinates
+            x_position = []
+            for i in range(len(self.invader_list)):
+                position = self.invader_list[i].get_position()
+                x = position[0]
+                y = position[1]
+                addXPosition = True
+                if len(x_position) != 0:
+                    # Cycle Through List of X Coordinates, If X Coordinate Is Not Included
+                    # Then Add It To The List. If The X Coordinate is included, do not add it
+                    # a second time to the list.
+                    for z in range(len(x_position)):
+                        if x == x_position[z]:
+                            addXPosition = False
+                # Add X Coordinate To The List if it has not already been added.
+                if addXPosition == True:
+                    x_position.append(x)
+            # Cycle Through The list of invaders again, and find the "low man" in each column
+            # (invader with the lowest y-coordinate position for a give column/x-coordinate)
+            low_man_index = [] # create a list which will hold the array index of the "low man" invader for any given column
+            low_man_ycor = []
+            for i in range(len(x_position)):
+                low_man_index.append(0)
+                low_man_ycor.append(9999)
+            if len(x_position) > 0:
+                for i in range(len(x_position)):
+                    addLowMan = True
+                    for j in range(len(self.invader_list)):
+                        xcor = self.invader_list[j].get_position()
+                        if xcor == x_position[i]:
+                            ycor = self.invader_list[j].get_position()
+                            if ycor < low_man_ycor[i]:
+                                low_man_ycor[i] = ycor
+                                low_man_index[i] = j
+            # FOR TESTING, FIRE A LAZER BEAM FROM ALL LOW MAN INVADERS
+            '''
+            for i in range(len(low_man_index)):
+                # Instantiate Lazer
+                lazer = Lazer("Lazer.png", 0.975)
+                # Position Lazer Beam
+                lazer.center_x = self.invader_list[low_man_index[i]]
+                # lazer.bottom = self.invader_list[low_man_index[i]].bottom
+                lazer.bottom = 250
+                lazer.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
+                # Add Lazer Beam to lazer_list
+                self.lazer_list.append(lazer)
+            '''
+        # END EXPERIMENTAL INVADER LAZER BEAM CODE
+
+
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
         # is pressed is contained in the on_key_press and on_key_release
