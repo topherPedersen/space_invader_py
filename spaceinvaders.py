@@ -839,7 +839,7 @@ class MyGame(arcade.Window):
                         xcor = self.invader_list[j].get_position()
                         if xcor == x_position[i]:
                             ycor = self.invader_list[j].get_position()
-                            if ycor < low_man_ycor[i]:
+                            if ycor > low_man_ycor[i]:
                                 low_man_ycor[i] = ycor
                                 low_man_index[i] = j
             # FOR TESTING, FIRE A LAZER BEAM FROM ALL LOW MAN INVADERS
@@ -854,7 +854,9 @@ class MyGame(arcade.Window):
                 lazer.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
                 # Add Lazer Beam to lazer_list
                 self.lazer_list.append(lazer)
+                # self.invader_list[low_man_index[i]].kill()
             '''
+            self.invader_list[low_man_index[0]].kill()
         # END EXPERIMENTAL INVADER LAZER BEAM CODE
 
 
