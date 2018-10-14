@@ -786,7 +786,7 @@ class MyGame(arcade.Window):
                     self.invader_list[x].change_y = 0
             # END MOVING INVADERS 50X SPEED
 
-        # LAZER BEAM CODE GOES HERE
+        # LAZER BEAM 
         self.lazer_list.update()
         for lazer in self.lazer_list:
             # Check this bullet to see if it hit a coin
@@ -800,34 +800,18 @@ class MyGame(arcade.Window):
             # If the bullet flies off-screen, remove it.
             if lazer.bottom > self.FULL_SCREEN_HEIGHT:
                 lazer.kill()
-        # END LAZER BEAM CODE
 
-        # DEATH RAY BEAM CODE GOES HERE
+        # DEATH RAY
+        self.death_ray_list.update()
         for deathray in self.death_ray_list:
-            # Check this bullet to see if it hit a coin
-            '''
-            hit_list = arcade.check_for_collision_with_list(deathray, self.invader_list)
+            # Check this deathray to see if it hit a shield
+            hit_list = arcade.check_for_collision_with_list(deathray, self.shield_list)
             # If it did, get rid of the bullet
             if len(hit_list) > 0:
-                lazer.kill()
-            # For every coin we hit, add to score and remove the coin
-            for invader in hit_list:
-                invader.kill()
-            '''
+                deathray.kill()
             # If the bullet flies off-screen, remove it.
             if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
                 deathray.kill()
-        # END LAZER BEAM CODE
-
-        # Detect Collisions Between Lazer Beams and Shields
-        # If a lazer beam collides with a shield, kill the lazer beam
-        self.shield_list.update()
-        for shield in self.shield_list:
-            # Check this bullet to see if it hit a coin
-            hit_list = arcade.check_for_collision_with_list(shield, self.lazer_list)
-            # For every coin we hit, add to score and remove the coin
-            for lazer in hit_list:
-                lazer.kill()
 
         # Have Invaders Randomly Shoot Lazer Beams
         if self.iteration % 10 == 0:
@@ -912,7 +896,6 @@ class MyGame(arcade.Window):
         # example though.)
         self.defender_list.update()
         self.invader_list.update()
-        self.death_ray_list.update()
 
     def on_key_press(self, key, key_modifiers):
         # EXIT FULL SCREEN WHEN ESCAPE KEY IS PRESSED
