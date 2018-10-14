@@ -815,7 +815,7 @@ class MyGame(arcade.Window):
                 invader.kill()
             '''
             # If the bullet flies off-screen, remove it.
-            if deathray.bottom > self.FULL_SCREEN_HEIGHT:
+            if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
                 deathray.kill()
         # END LAZER BEAM CODE
 
