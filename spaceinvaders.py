@@ -29,7 +29,7 @@ class Invader(arcade.Sprite):
         self.texture_right = arcade.load_texture(imageFilenameB, scale=0.975)
 
         # By default, face right.
-        self.texture = self.texture_right
+        self.texture = self.texture_left
 
         # current direction (facing either "left" or "right")
         self.facing = "left"
