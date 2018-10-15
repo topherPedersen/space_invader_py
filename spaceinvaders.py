@@ -64,6 +64,7 @@ class MyGame(arcade.Window):
         self.invader_list = None
         self.lazer_list = None
         self.death_ray_list = None
+        self.shield_list = None
 
         # Set up the player info
         self.defender_sprite = None
@@ -76,6 +77,7 @@ class MyGame(arcade.Window):
 
         # Create Game State Variables
         self.invaderDirection = "left"
+        self.bottom_invader_y_position = 99999999
 
         # Get Full Screen Width & Height
         self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
@@ -333,6 +335,15 @@ class MyGame(arcade.Window):
         self.death_ray_list.draw()
 
     def update(self, delta_time):
+        # Determine Whether the Shields Should Be removed depending on the y-coordinates
+        # of the lowest invader.
+        if len(self.shield_list) >= 1:
+            shield_coordinates = self.shield_list[0].get_position()
+            shield_ycor = shield_coordinates[1]
+            if self.bottom_invader_y_position < shield_ycor + 100:
+                while len(self.shield_list) >= 1:
+                    self.shield_list[0].kill()
+
         # Determine How Fast to Move Invaders Depending on
         # How Far They Have Advanced Down the Screen
         
@@ -817,8 +828,8 @@ class MyGame(arcade.Window):
             if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
                 deathray.kill()
 
-        # Have Invaders Randomly Shoot Lazer Beams
-        if self.iteration % 10 == 0 and len(self.death_ray_list) == 0:
+        # Select Nearest Invader to Fire Death Ray Beams at Defender
+        if self.iteration % 5 == 0 and len(self.death_ray_list) == 0:
             # Get the x-coordinate of every invader
             x_coordinate = []
             for i in range(len(self.invader_list)):
@@ -857,6 +868,12 @@ class MyGame(arcade.Window):
                         if ycor < bottom_invader_ycor[i]:
                             bottom_invader_index[i] = j
                             bottom_invader_ycor[i] = ycor
+            # Identify Invader With The Lowest Y Coordinate Position (not necessarily closest invader)
+            # We will use this information elsewhere in the program to determine whether or not
+            # to remove the shields between the invaders and the defender.
+            for i in range(len(bottom_invader_ycor)):
+                if bottom_invader_ycor[i] < self.bottom_invader_y_position:
+                    self.bottom_invader_y_position = bottom_invader_ycor[i]
             # Identify The Bottom Invader Closest to the Defender on the X-Axis
             if len(bottom_invader_index) >= 1:
                 indexOfClosestInvader = False
