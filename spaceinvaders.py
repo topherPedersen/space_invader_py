@@ -818,8 +818,8 @@ class MyGame(arcade.Window):
                 deathray.kill()
 
         # Have Invaders Randomly Shoot Lazer Beams
-        if self.iteration % 10 == 0:
-            if random.randint(1, 20) == 7:
+        if self.iteration % 10 == 0 and len(self.death_ray_list) == 0:
+            if True:
                 # Get the x-coordinate of every invader
                 x_coordinate = []
                 for i in range(len(self.invader_list)):
