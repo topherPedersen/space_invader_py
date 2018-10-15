@@ -402,7 +402,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 300:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Next, March Invaders Right 20 Times
             elif (self.iteration == 330
                 or self.iteration == 360
@@ -442,7 +442,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 900:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Last, March Invaders Left Right 10 Times Back To The Center of the Screen
             elif (self.iteration == 930
                 or self.iteration == 960
@@ -517,7 +517,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 150:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Next, March Invaders Right 20 Times
             elif (self.iteration == 165
                 or self.iteration == 180
@@ -557,7 +557,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 450:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Last, March Invaders Left Right 10 Times Back To The Center of the Screen
             elif (self.iteration == 465
                 or self.iteration == 480
@@ -632,7 +632,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 50:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Next, March Invaders Right 20 Times
             elif (self.iteration == 55
                 or self.iteration == 60
@@ -672,7 +672,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 150:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Last, March Invaders Left Right 10 Times Back To The Center of the Screen
             elif (self.iteration == 155
                 or self.iteration == 160
@@ -743,7 +743,7 @@ class MyGame(arcade.Window):
                     '''
                     for x in range(len(self.invader_list)):
                         if self.iteration == 10:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Next, March Invaders Right 20 Times
             elif (self.iteration == 12
                 or self.iteration == 14
@@ -771,7 +771,7 @@ class MyGame(arcade.Window):
                         self.invader_advancements = self.invader_advancements + 1 # increment number of advancements
                     for x in range(len(self.invader_list)):
                         if self.iteration == 30:
-                            self.invader_list[x].change_y = -25
+                            self.invader_list[x].change_y = -37
             # Last, March Invaders Left Right 10 Times Back To The Center of the Screen
             elif (self.iteration == 32
                 or self.iteration == 34
