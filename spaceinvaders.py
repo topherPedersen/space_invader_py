@@ -819,56 +819,61 @@ class MyGame(arcade.Window):
 
         # Have Invaders Randomly Shoot Lazer Beams
         if self.iteration % 10 == 0 and len(self.death_ray_list) == 0:
-            if True:
-                # Get the x-coordinate of every invader
-                x_coordinate = []
-                for i in range(len(self.invader_list)):
-                    position = self.invader_list[i].get_position()
-                    x = position[0]
-                    x_coordinate.append(x)
-                unique_x_coordinate = []
-                for i in range(len(x_coordinate)):
-                    if len(unique_x_coordinate) == 0:
-                        unique_x_coordinate.append(x_coordinate[i])
+            # Get the x-coordinate of every invader
+            x_coordinate = []
+            for i in range(len(self.invader_list)):
+                position = self.invader_list[i].get_position()
+                x = position[0]
+                x_coordinate.append(x)
+            unique_x_coordinate = []
+            for i in range(len(x_coordinate)):
+                if len(unique_x_coordinate) == 0:
+                    unique_x_coordinate.append(x_coordinate[i])
+                else:
+                    addCoordinate = True
+                    for j in range(len(unique_x_coordinate)):
+                        if x_coordinate[i] == unique_x_coordinate[j]:
+                            addCoordinate = False
+                    if addCoordinate == True:
+                        unique_x_coordinate.append(x_coordinate[i])  
+            # For Each Column (unique_x_coordinate), Find the Bottom Invader (lowest y-coordinate)
+            bottom_invader_index = []
+            bottom_invader_xcor = []
+            bottom_invader_ycor = []
+            for i in range(len(unique_x_coordinate)):
+                bottom_invader_index.append(False)
+                bottom_invader_xcor.append(unique_x_coordinate[i])
+                bottom_invader_ycor.append(99999999)
+            for i in range(len(unique_x_coordinate)):  
+                for j in range(len(self.invader_list)):
+                    coordinate = self.invader_list[j].get_position()
+                    xcor = coordinate[0]
+                    ycor = coordinate[1]
+                    if xcor == unique_x_coordinate[i]:
+                        isInColumnOfInterest = True
                     else:
-                        addCoordinate = True
-                        for j in range(len(unique_x_coordinate)):
-                            if x_coordinate[i] == unique_x_coordinate[j]:
-                                addCoordinate = False
-                        if addCoordinate == True:
-                            unique_x_coordinate.append(x_coordinate[i])  
-                # For Each Column (unique_x_coordinate), Find the Bottom Invader (lowest y-coordinate)
-                bottom_invader_index = []
-                bottom_invader_xcor = []
-                bottom_invader_ycor = []
-                for i in range(len(unique_x_coordinate)):
-                    bottom_invader_index.append(False)
-                    bottom_invader_xcor.append(unique_x_coordinate[i])
-                    bottom_invader_ycor.append(99999999)
-                for i in range(len(unique_x_coordinate)):  
-                    for j in range(len(self.invader_list)):
-                        coordinate = self.invader_list[j].get_position()
-                        xcor = coordinate[0]
-                        ycor = coordinate[1]
-                        if xcor == unique_x_coordinate[i]:
-                            isInColumnOfInterest = True
-                        else:
-                            isInColumnOfInterest = False
-                        if isInColumnOfInterest == True:
-                            if ycor < bottom_invader_ycor[i]:
-                                bottom_invader_index[i] = j
-                                bottom_invader_ycor[i] = ycor
-                # Select One of the Bottom Invaders Randomly, and Fire a Death Ray
-                if len(unique_x_coordinate) >= 1: # Execute Code if at least 1 invader is still alive
-                    randomNumber = random.randint(0, len(unique_x_coordinate) - 1)
-                    deathRay = DeathRay("Lazer.png", 0.975)
-                    index = bottom_invader_index[randomNumber]
-                    selectedInvader = self.invader_list[index]
-                    deathRay.center_x = selectedInvader.center_x
-                    deathRay.top = selectedInvader.bottom
-                    deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
-                    # Add Lazer Beam to lazer_list
-                    self.death_ray_list.append(deathRay)
+                        isInColumnOfInterest = False
+                    if isInColumnOfInterest == True:
+                        if ycor < bottom_invader_ycor[i]:
+                            bottom_invader_index[i] = j
+                            bottom_invader_ycor[i] = ycor
+            # Identify The Bottom Invader Closest to the Defender on the X-Axis
+            if len(bottom_invader_index) >= 1:
+                indexOfClosestInvader = False
+                xCoordinateOfClosestInvader = 99999999
+                for i in range(len(bottom_invader_index)):
+                    defender_coordinates = self.defender_list[0].get_position()
+                    defender_xcor = defender_coordinates[0]
+                    if abs(defender_xcor - bottom_invader_xcor[i]) < abs(defender_xcor - xCoordinateOfClosestInvader):
+                        indexOfClosestInvader = bottom_invader_index[i]
+                        xCoordinateOfClosestInvader = bottom_invader_xcor[i]
+                # Fire Death Ray From Closest Invader
+                deathRay = DeathRay("Lazer.png", 0.975)
+                selectedInvader = self.invader_list[indexOfClosestInvader]
+                deathRay.center_x = selectedInvader.center_x
+                deathRay.top = selectedInvader.bottom
+                deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
+                self.death_ray_list.append(deathRay)
 
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
