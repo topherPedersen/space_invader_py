@@ -884,6 +884,24 @@ class MyGame(arcade.Window):
                     if abs(defender_xcor - bottom_invader_xcor[i]) < abs(defender_xcor - xCoordinateOfClosestInvader):
                         indexOfClosestInvader = bottom_invader_index[i]
                         xCoordinateOfClosestInvader = bottom_invader_xcor[i]
+                # Determine whether a shield is in the way of the invader and the defender
+                shieldBetweenInvaderAndDefender = False
+                for i in range(len(self.shield_list)):
+                    shield_coordinates = self.shield_list[i].get_position()
+                    shield_xcor = shield_coordinates[0]
+                    invader_coordinates = self.invader_list[indexOfClosestInvader].get_position()
+                    invader_xcor = invader_coordinates[0]
+                    if invader_xcor > shield_xcor - 40 and invader_xcor < shield_xcor + 40:
+                        # Select Next Closest Invader not blocked by Shield
+                        nextClosestInvaderIndex = False
+                        for j in range(len(bottom_invader_index)):
+                            if bottom_invader_xcor[j] == invader_xcor:
+                                coinToss = random.randint(0, 1)
+                                if coinToss == 0:
+                                    one_or_negative_one = -1
+                                else:
+                                    one_or_negative_one = 1
+                                indexOfClosestInvader = bottom_invader_index[j+one_or_negative_one]
                 # Fire Death Ray From Closest Invader
                 deathRay = DeathRay("Lazer.png", 0.975)
                 selectedInvader = self.invader_list[indexOfClosestInvader]
