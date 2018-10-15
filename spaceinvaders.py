@@ -829,7 +829,7 @@ class MyGame(arcade.Window):
                 deathray.kill()
 
         # Select Nearest Invader to Fire Death Ray Beams at Defender
-        if self.iteration % 5 == 0 and len(self.death_ray_list) == 0:
+        if self.iteration % 2 == 0 and len(self.death_ray_list) == 0:
             # Get the x-coordinate of every invader
             x_coordinate = []
             for i in range(len(self.invader_list)):
@@ -871,6 +871,7 @@ class MyGame(arcade.Window):
             # Identify Invader With The Lowest Y Coordinate Position (not necessarily closest invader)
             # We will use this information elsewhere in the program to determine whether or not
             # to remove the shields between the invaders and the defender.
+            fire = True
             for i in range(len(bottom_invader_ycor)):
                 if bottom_invader_ycor[i] < self.bottom_invader_y_position:
                     self.bottom_invader_y_position = bottom_invader_ycor[i]
@@ -901,14 +902,18 @@ class MyGame(arcade.Window):
                                     one_or_negative_one = -1
                                 else:
                                     one_or_negative_one = 1
-                                indexOfClosestInvader = bottom_invader_index[j+one_or_negative_one]
+                                if j >= 1 and j < len(bottom_invader_index) - 2:
+                                    indexOfClosestInvader = bottom_invader_index[j+one_or_negative_one]
+                                else:
+                                    fire = False
                 # Fire Death Ray From Closest Invader
-                deathRay = DeathRay("Lazer.png", 0.975)
-                selectedInvader = self.invader_list[indexOfClosestInvader]
-                deathRay.center_x = selectedInvader.center_x
-                deathRay.top = selectedInvader.bottom
-                deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
-                self.death_ray_list.append(deathRay)
+                if fire == True:
+                    deathRay = DeathRay("Lazer.png", 0.975)
+                    selectedInvader = self.invader_list[indexOfClosestInvader]
+                    deathRay.center_x = selectedInvader.center_x
+                    deathRay.top = selectedInvader.bottom
+                    deathRay.change_x = -5 # Set Rise Equal To Negative Value so Lazer Beam Travels Downward
+                    self.death_ray_list.append(deathRay)
 
         # If Joystick is Available, Move Player When Joystick Moved
         # NOTICE: The code to move the player when a keyboard button
