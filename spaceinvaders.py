@@ -8,7 +8,8 @@ SPRITE_SCALING_INVADER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwante
 MOVEMENT_SPEED = 5 # Used With Keyboard
 MOVEMENT_MULTIPLIER = 5 # Used With Joystick
 DEAD_ZONE = 0.05 # Joystick Related Constant (See Arcade Documentation Regarding Joysticks)
-LAZER_SPEED = 5
+LAZER_SPEED = 7
+DEATH_RAY_SPEED = 4
 
 class Lazer(arcade.Sprite):
     def update(self):
@@ -16,7 +17,7 @@ class Lazer(arcade.Sprite):
 
 class DeathRay(arcade.Sprite):
     def update(self):
-        self.center_y -= LAZER_SPEED
+        self.center_y -= DEATH_RAY_SPEED
 
 class Invader(arcade.Sprite):
     def __init__(self, imageFilenameA, imageFilenameB):
