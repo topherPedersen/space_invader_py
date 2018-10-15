@@ -924,6 +924,16 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.defender_sprite.change_x = MOVEMENT_SPEED
             self.rightButtonDown = True
+        elif key == arcade.key.SPACE:
+            # If there are no other lazer beams currently on screen, then fire.
+            if len(self.lazer_list) == 0:
+                # Instantiate Lazer
+                lazer = Lazer("Lazer.png", 0.975)
+                # Position Lazer Beam
+                lazer.center_x = self.defender_sprite.center_x
+                lazer.bottom = self.defender_sprite.top
+                # Add Lazer Beam to lazer_list
+                self.lazer_list.append(lazer)
 
     def on_key_release(self, key, key_modifiers):
         """
@@ -939,13 +949,15 @@ class MyGame(arcade.Window):
             self.rightButtonDown = False
 
     def on_joybutton_press(self, joystick, button):
-        # Instantiate Lazer
-        lazer = Lazer("Lazer.png", 0.975)
-        # Position Lazer Beam
-        lazer.center_x = self.defender_sprite.center_x
-        lazer.bottom = self.defender_sprite.top
-        # Add Lazer Beam to lazer_list
-        self.lazer_list.append(lazer)
+        # If there are no other lazer beams currently on screen, then fire.
+        if len(self.lazer_list) == 0:
+            # Instantiate Lazer
+            lazer = Lazer("Lazer.png", 0.975)
+            # Position Lazer Beam
+            lazer.center_x = self.defender_sprite.center_x
+            lazer.bottom = self.defender_sprite.top
+            # Add Lazer Beam to lazer_list
+            self.lazer_list.append(lazer)
 
 
 
