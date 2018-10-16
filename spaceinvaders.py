@@ -39,6 +39,22 @@ class Invader(arcade.Sprite):
         # update stuf here...
     '''
 
+class Defender(arcade.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        self.texture_standard = arcade.load_texture("Defender.png", scale=0.975)
+        self.texture_hidden = arcade.load_texture("HiddenDefender.png", scale=0.975)
+        self.texture = self.texture_standard
+
+    def hide(self):
+        self.texture = self.texture_hidden
+        time.sleep(3)
+        self.texture = self.texture_standard
+        time.sleep(3)
+        self.texture = self.texture_hidden
+        time.sleep(3)
+        self.texture = self.texture_standard
 
 class MyGame(arcade.Window):
     def __init__(self):
@@ -104,10 +120,11 @@ class MyGame(arcade.Window):
         self.death_ray_list = arcade.SpriteList()
 
         # Create Defender
-        self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
+        self.defender_sprite = Defender() # Instantiate
         self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH / 2 # Position
         self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.25 # Position
         self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
+        # self.defender_list[0].append
 
         # Create Shields
         for i in range(3):
