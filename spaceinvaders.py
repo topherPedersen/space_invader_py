@@ -109,6 +109,8 @@ class MyGame(arcade.Window):
         self.flash = False
         self.flashCount = -1
 
+        self.lives = 3
+
     def setup(self):
         # Create Sprite Lists
         self.defender_list = arcade.SpriteList()
@@ -356,6 +358,10 @@ class MyGame(arcade.Window):
         if self.pause == True:
             time.sleep(5)
             self.pause = False
+
+        if self.lives <= 0:
+            # GAME OVER
+            return
 
         # Execute This Statement If the Defender Has Been Hit By a DeathRay
         # (This if-statement will jump over the rest of the update method,
@@ -876,6 +882,7 @@ class MyGame(arcade.Window):
             for defender in hit_list:
                 self.flash = True
                 self.flashCount = 0
+                self.lives = self.lives - 1
             # If the bullet flies off-screen, remove it.
             if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
                 deathray.kill()
