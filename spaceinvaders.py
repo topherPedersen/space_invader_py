@@ -825,12 +825,45 @@ class MyGame(arcade.Window):
 
         # DEATH RAY
         self.death_ray_list.update()
+        alive = True
         for deathray in self.death_ray_list:
             # Check this deathray to see if it hit a shield
             hit_list = arcade.check_for_collision_with_list(deathray, self.shield_list)
             # If it did, get rid of the bullet
             if len(hit_list) > 0:
                 deathray.kill()
+            # If deathray/defender collision detected, kill lazer beam and defender.
+            hit_list = arcade.check_for_collision_with_list(deathray, self.defender_list)
+            if len(hit_list) > 0:
+                deathray.kill()
+            '''
+            for defender in hit_list:
+                defender.kill()
+                alive = False
+            if alive == False: 
+                # If the defender has been killed, resurrect him.
+                # (we will actually resurrect and kill several times to create a flashing effect 
+                #  on the screen like in the original game)
+                self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
+                self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH * 0.25 # Position
+                self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.25 # Position
+                self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
+                time.sleep(3)
+                self.defender_list[0].kill()
+                time.sleep(3)
+                self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
+                self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH * 0.25 # Position
+                self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.25 # Position
+                self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
+                time.sleep(3)
+                self.defender_list[0].kill()
+                time.sleep(3)
+                self.defender_sprite = arcade.Sprite("Defender.png", SPRITE_SCALING_PLAYER) # Instantiate
+                self.defender_sprite.center_x = self.FULL_SCREEN_WIDTH * 0.25 # Position
+                self.defender_sprite.center_y = self.FULL_SCREEN_HEIGHT * 0.25 # Position
+                self.defender_list.append(self.defender_sprite) # Add Defender to Defender List
+                alive = True
+            '''
             # If the bullet flies off-screen, remove it.
             if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
                 deathray.kill()
