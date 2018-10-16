@@ -1,6 +1,7 @@
-import random
 import arcade
+import random
 import os
+import time
 
 # --- Constants ---
 SPRITE_SCALING_PLAYER = 0.975 # NOTE: Set Slightly Below 1.0 to Prevent Unwanted Side Effects
@@ -91,6 +92,8 @@ class MyGame(arcade.Window):
 
         self.invader_speed = 1
         self.invader_advancements = 0
+
+        self.pause = False
 
     def setup(self):
         # Create Sprite Lists
@@ -335,6 +338,10 @@ class MyGame(arcade.Window):
         self.death_ray_list.draw()
 
     def update(self, delta_time):
+        if self.pause == True:
+            time.sleep(5)
+            self.pause = False
+
         # Determine Whether the Shields Should Be removed depending on the y-coordinates
         # of the lowest invader.
         if len(self.shield_list) >= 1:
@@ -964,6 +971,8 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.defender_sprite.change_x = MOVEMENT_SPEED
             self.rightButtonDown = True
+        elif key == arcade.key.P:
+            self.pause = True
         elif key == arcade.key.SPACE:
             # If there are no other lazer beams currently on screen, then fire.
             if len(self.lazer_list) == 0:
