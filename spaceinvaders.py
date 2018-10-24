@@ -111,6 +111,8 @@ class MyGame(arcade.Window):
 
         self.lives = 3
 
+        self.reset = False
+
     def setup(self):
         # Create Sprite Lists
         self.defender_list = arcade.SpriteList()
@@ -360,6 +362,21 @@ class MyGame(arcade.Window):
             self.pause = False
 
         if self.lives <= 0:
+            if self.reset == False:
+                # Remove All Remaining Character Sprites From Screen
+                # If The Player Has Died, And The Game Has Not Yet
+                # Been Reset
+                while len(self.invader_list) > 0:
+                    self.invader_list[0].kill()
+                while len(self.lazer_list) > 0:
+                    self.lazer_list[0].kill()
+                while len(self.death_ray_list) > 0:
+                    self.death_ray_list[0].kill()
+                while len(self.shield_list) > 0:
+                    self.shield_list[0].kill()
+                while len(self.defender_list) > 0:
+                    self.defender_list[0].kill()
+                self.reset = True
             # GAME OVER
             return
 
