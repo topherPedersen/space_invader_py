@@ -113,6 +113,10 @@ class MyGame(arcade.Window):
 
         self.reset = False
 
+        self.draw_count = 0
+
+        self.display_game_over_screen = False
+
     def setup(self):
         # Create Sprite Lists
         self.defender_list = arcade.SpriteList()
@@ -349,12 +353,25 @@ class MyGame(arcade.Window):
         # the screen to the background color, and erase what we drew last frame.
         arcade.start_render()
 
-        # Call draw() on all your sprite lists below
-        self.defender_list.draw()
-        self.invader_list.draw()
-        self.lazer_list.draw()
-        self.shield_list.draw()
-        self.death_ray_list.draw()
+        if self.display_game_over_screen == False:
+            # Call draw() on all your sprite lists below
+            self.defender_list.draw()
+            self.invader_list.draw()
+            self.lazer_list.draw()
+            self.shield_list.draw()
+            self.death_ray_list.draw()
+        else:
+            self.draw_game_over()
+
+    def draw_game_over(self):
+        """
+        Draw "Game over" across the screen.
+        """
+        output = "GAME OVER"
+        arcade.draw_text(output, 240, 400, arcade.color.WHITE, 54)
+
+        output = "Click to restart"
+        arcade.draw_text(output, 310, 300, arcade.color.WHITE, 24)
 
     def update(self, delta_time):
         if self.pause == True:
@@ -366,6 +383,7 @@ class MyGame(arcade.Window):
                 # Remove All Remaining Character Sprites From Screen
                 # If The Player Has Died, And The Game Has Not Yet
                 # Been Reset
+                '''
                 while len(self.invader_list) > 0:
                     self.invader_list[0].kill()
                 while len(self.lazer_list) > 0:
@@ -376,7 +394,9 @@ class MyGame(arcade.Window):
                     self.shield_list[0].kill()
                 while len(self.defender_list) > 0:
                     self.defender_list[0].kill()
+                '''
                 self.reset = True
+                self.display_game_over_screen = True
             # GAME OVER
             return
 
