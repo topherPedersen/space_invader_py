@@ -372,10 +372,8 @@ class MyGame(arcade.Window):
         center_y = (self.FULL_SCREEN_HEIGHT / 2)
         arcade.draw_text(output, center_x, center_y, arcade.color.RED, 14, width=500, align="center")
   
-        '''
-        output = "Click to restart"
-        arcade.draw_text(output, 310, 300, arcade.color.WHITE, 24)
-        '''
+        output = "PRESS <ENTER> TO PLAY AGAIN"
+        arcade.draw_text(output, center_x, center_y - 50, arcade.color.RED, 14, width=500, align="center")
 
     def update(self, delta_time):
         if self.pause == True:
