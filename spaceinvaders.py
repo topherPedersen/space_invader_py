@@ -344,6 +344,53 @@ class MyGame(arcade.Window):
             # Add Invader to Invader List
             self.invader_list.append(invader)
 
+    def prepare_new_game(self):
+        # If you have sprite lists, you should create them here,
+        # and set them to None
+        self.defender_list = None
+        self.invader_list = None
+        self.lazer_list = None
+        self.death_ray_list = None
+        self.shield_list = None
+
+        # Set up the player info
+        self.defender_sprite = None
+
+        # Don't show the mouse cursor
+        self.set_mouse_visible(False)
+
+        # Debugging Variable
+        self.iteration = 0
+
+        # Create Game State Variables
+        self.invaderDirection = "left"
+        self.bottom_invader_y_position = 99999999
+
+        # Get Full Screen Width & Height
+        self.FULL_SCREEN_WIDTH, self.FULL_SCREEN_HEIGHT = self.get_size()
+        self.CENTER_X =  self.FULL_SCREEN_WIDTH / 2
+        self.CENTER_Y =  self.FULL_SCREEN_HEIGHT / 2
+        self.LEFT_BOUNDARY_X = self.CENTER_X - (self.CENTER_X * 0.5)
+        self.RIGHT_BOUNDARY_X = self.CENTER_X + (self.CENTER_X * 0.5)
+
+        self.leftButtonDown = False
+        self.rightButtonDown = False
+
+        self.invader_speed = 1
+        self.invader_advancements = 0
+
+        self.pause = False
+        self.flash = False
+        self.flashCount = -1
+
+        self.lives = 3
+
+        self.reset = False
+
+        self.draw_count = 0
+
+        self.display_game_over_screen = False
+
     def on_draw(self):
         """
         Render the screen.
@@ -1079,6 +1126,7 @@ class MyGame(arcade.Window):
                 self.display_game_over_screen = False
                 self.reset = False
                 self.lives = 3
+                self.prepare_new_game() # resets game variables back to original state
                 self.setup()
 
     def on_key_release(self, key, key_modifiers):
