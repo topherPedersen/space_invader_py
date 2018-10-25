@@ -973,6 +973,30 @@ class MyGame(arcade.Window):
             if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
                 deathray.kill()
 
+        # INVADER/DEFENDER COLLISION DETECTION
+        # (THIS IS NECESSARY TO PREVENT OVERLAPPING PNG IMAGES IN THE GAME
+        '''
+        self.death_ray_list.update()
+        alive = True
+        for deathray in self.death_ray_list:
+            # Check this deathray to see if it hit a shield
+            hit_list = arcade.check_for_collision_with_list(deathray, self.shield_list)
+            # If it did, get rid of the bullet
+            if len(hit_list) > 0:
+                deathray.kill()
+            # If deathray/defender collision detected, kill lazer beam and make defender "flash".
+            hit_list = arcade.check_for_collision_with_list(deathray, self.defender_list)
+            if len(hit_list) > 0:
+                deathray.kill()
+            for defender in hit_list:
+                self.flash = True
+                self.flashCount = 0
+                self.lives = self.lives - 1
+            # If the bullet flies off-screen, remove it.
+            if deathray.bottom < self.FULL_SCREEN_HEIGHT - self.FULL_SCREEN_HEIGHT:
+                deathray.kill()
+        '''
+
         # Select Nearest Invader to Fire Death Ray Beams at Defender
         if len(self.death_ray_list) == 0:
             # Get the x-coordinate of every invader
@@ -1020,6 +1044,14 @@ class MyGame(arcade.Window):
             for i in range(len(bottom_invader_ycor)):
                 if bottom_invader_ycor[i] < self.bottom_invader_y_position:
                     self.bottom_invader_y_position = bottom_invader_ycor[i]
+                    # DETECT IF BOTTOM INVADER HAS REACHED THE DEFENDER
+                    # IF THE BOTTOM-MOST INVADER HAS REACHED THE DEFENDER THEN... GAME OVER
+                    defender_position = self.defender_list[0].get_position()
+                    defender_ycor = defender_position[1]
+                    if self.bottom_invader_y_position < defender_ycor + 25:
+                        self.lives = 0
+                        self.display_game_over_screen = True
+                        return  # break outer method to end game
             # Identify The Bottom Invader Closest to the Defender on the X-Axis
             if len(bottom_invader_index) >= 1:
                 indexOfClosestInvader = False
