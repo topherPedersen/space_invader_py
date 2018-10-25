@@ -368,10 +368,14 @@ class MyGame(arcade.Window):
         Draw "Game over" across the screen.
         """
         output = "GAME OVER"
-        arcade.draw_text(output, 240, 400, arcade.color.WHITE, 54)
-
+        center_x = (self.FULL_SCREEN_WIDTH / 2) - 250
+        center_y = (self.FULL_SCREEN_HEIGHT / 2)
+        arcade.draw_text(output, center_x, center_y, arcade.color.RED, 14, width=500, align="center")
+  
+        '''
         output = "Click to restart"
         arcade.draw_text(output, 310, 300, arcade.color.WHITE, 24)
+        '''
 
     def update(self, delta_time):
         if self.pause == True:
