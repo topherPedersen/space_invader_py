@@ -1076,6 +1076,12 @@ class MyGame(arcade.Window):
                 lazer.bottom = self.defender_sprite.top
                 # Add Lazer Beam to lazer_list
                 self.lazer_list.append(lazer)
+        elif key == arcade.key.ENTER:
+            if self.display_game_over_screen == True:
+                self.display_game_over_screen = False
+                self.reset = False
+                self.lives = 3
+                self.setup()
 
     def on_key_release(self, key, key_modifiers):
         """
