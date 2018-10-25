@@ -1044,14 +1044,15 @@ class MyGame(arcade.Window):
             for i in range(len(bottom_invader_ycor)):
                 if bottom_invader_ycor[i] < self.bottom_invader_y_position:
                     self.bottom_invader_y_position = bottom_invader_ycor[i]
-                    # DETECT IF BOTTOM INVADER HAS REACHED THE DEFENDER
-                    # IF THE BOTTOM-MOST INVADER HAS REACHED THE DEFENDER THEN... GAME OVER
-                    defender_position = self.defender_list[0].get_position()
-                    defender_ycor = defender_position[1]
-                    if self.bottom_invader_y_position < defender_ycor + 25:
-                        self.lives = 0
-                        self.display_game_over_screen = True
-                        return  # break outer method to end game
+            # DETECT IF BOTTOM INVADER HAS REACHED THE DEFENDER
+            # IF THE BOTTOM-MOST INVADER HAS REACHED THE DEFENDER THEN... GAME OVER
+            defender_position = self.defender_list[0].get_position()
+            defender_ycor = defender_position[1]
+            if self.bottom_invader_y_position < defender_ycor + 25:
+                self.lives = 0
+                self.display_game_over_screen = True
+                time.sleep(2) # pause briefly after invaders reach defender
+                return  # break outer method to end game
             # Identify The Bottom Invader Closest to the Defender on the X-Axis
             if len(bottom_invader_index) >= 1:
                 indexOfClosestInvader = False
