@@ -418,7 +418,7 @@ class MyGame(arcade.Window):
         center_x = (self.FULL_SCREEN_WIDTH / 2) - 250
         center_y = (self.FULL_SCREEN_HEIGHT / 2)
         arcade.draw_text(output, center_x, center_y, arcade.color.RED, 14, width=500, align="center")
-  
+
         output = "PRESS <ENTER> TO PLAY AGAIN"
         arcade.draw_text(output, center_x, center_y - 50, arcade.color.RED, 14, width=500, align="center")
 
@@ -951,6 +951,12 @@ class MyGame(arcade.Window):
             # If lazer goes off screen, remove it.
             if lazer.bottom > self.FULL_SCREEN_HEIGHT:
                 lazer.kill()
+
+            # Zayaan, and Faraz (FTW), I want you to write an if-statement
+            # that says, if len(self.invader_list) equals zero... exit()
+
+            if len(self.invader_list) == 0:
+                exit()
 
         # DEATH RAY
         self.death_ray_list.update()
